@@ -1,0 +1,10 @@
+/.vs
+/packages
+/Hotel.Web/bin
+/Hotel.Web/obj
+/Hotel.Api/bin
+/Hotel.Api/obj
+/Hotel.Domain/obj
+/Hotel.Domain/bin
+/Hotel.Persistence/bin
+/Hotel.Persistence/obj
