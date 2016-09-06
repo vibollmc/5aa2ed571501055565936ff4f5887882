@@ -44,12 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BookStoreInProgress.cs" />
+    <Compile Include="Data\Customer.cs" />
     <Compile Include="Data\Enum\Gender.cs" />
     <Compile Include="Data\Enum\GroupUser.cs" />
+    <Compile Include="Data\Enum\RoomStatus.cs" />
     <Compile Include="Data\Enum\ServiceType.cs" />
     <Compile Include="Data\Enum\Status.cs" />
+    <Compile Include="Data\MetaData\Floor.cs" />
     <Compile Include="Data\MongoEntity.cs" />
     <Compile Include="Data\OtherService.cs" />
+    <Compile Include="Data\Room.cs" />
+    <Compile Include="Data\RoomType.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
@@ -59,9 +65,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\MetaData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

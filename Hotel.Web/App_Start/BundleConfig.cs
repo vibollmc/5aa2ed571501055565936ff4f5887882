@@ -32,13 +32,20 @@ namespace Hotel.Web
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Login/css").Include(
+            bundles.Add(new StyleBundle("~/Main/css").Include(
                       "~/css/bootstrap.min.css",
                       "~/css/bootstrap-theme.css",
                       "~/css/elegant-icons-style.css",
                       "~/css/font-awesome.css",
                       "~/css/style.css",
                       "~/css/style-responsive.css"));
+
+            bundles.Add(new ScriptBundle("~/Main/js").Include(
+                      "~/js/jquery.js",
+                      "~/js/bootstrap.min.js",
+                      "~/js/jquery.scrollTo.min.js",
+                      "~/js/jquery.nicescroll.js",
+                      "~/js/scripts.js"));
         }
     }
 }
