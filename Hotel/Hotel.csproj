@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{13C3F8E5-6EF4-4DD2-9A9F-9FBF2B5A0A2D}</ProjectGuid>
+    <ProjectGuid>{8FAB9748-81A3-47B5-9762-FF8A056C6350}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hotel.Api</RootNamespace>
-    <AssemblyName>Hotel.Api</AssemblyName>
+    <RootNamespace>Hotel</RootNamespace>
+    <AssemblyName>Hotel</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,13 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IHotelApi.cs" />
+    <Compile Include="HotelApi.cs" />
+    <Compile Include="CompositionBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HMS.DependencyInjection\HMS.DependencyInjection.csproj">
+      <Project>{d298c8e2-28ed-420e-9f11-d55e8df6a25f}</Project>
+      <Name>HMS.DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotel.Api\Hotel.Api.csproj">
+      <Project>{13c3f8e5-6ef4-4dd2-9a9f-9fbf2b5a0a2d}</Project>
+      <Name>Hotel.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hotel.Domain\Hotel.Domain.csproj">
       <Project>{de13c8ef-dc0e-474b-b1fd-9d4ca45e5751}</Project>
       <Name>Hotel.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotel.Persistence\Hotel.Persistence.csproj">
+      <Project>{dac30fa3-0af0-4230-a086-c4d5ef7523b7}</Project>
+      <Name>Hotel.Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

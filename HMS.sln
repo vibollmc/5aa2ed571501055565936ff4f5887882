@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Persistence", "Hotel.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS.DependencyInjection", "HMS.DependencyInjection\HMS.DependencyInjection.csproj", "{D298C8E2-28ED-420E-9F11-D55E8DF6A25F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel", "Hotel\Hotel.csproj", "{8FAB9748-81A3-47B5-9762-FF8A056C6350}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hotel-Context", "Hotel-Context", "{6DE70CEE-5C04-4C5E-A5C5-E41F111A81CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +43,18 @@ Global
 		{D298C8E2-28ED-420E-9F11-D55E8DF6A25F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D298C8E2-28ED-420E-9F11-D55E8DF6A25F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D298C8E2-28ED-420E-9F11-D55E8DF6A25F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FAB9748-81A3-47B5-9762-FF8A056C6350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FAB9748-81A3-47B5-9762-FF8A056C6350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FAB9748-81A3-47B5-9762-FF8A056C6350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FAB9748-81A3-47B5-9762-FF8A056C6350}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE13C8EF-DC0E-474B-B1FD-9D4CA45E5751} = {6DE70CEE-5C04-4C5E-A5C5-E41F111A81CE}
+		{13C3F8E5-6EF4-4DD2-9A9F-9FBF2B5A0A2D} = {6DE70CEE-5C04-4C5E-A5C5-E41F111A81CE}
+		{DAC30FA3-0AF0-4230-A086-C4D5EF7523B7} = {6DE70CEE-5C04-4C5E-A5C5-E41F111A81CE}
+		{8FAB9748-81A3-47B5-9762-FF8A056C6350} = {6DE70CEE-5C04-4C5E-A5C5-E41F111A81CE}
 	EndGlobalSection
 EndGlobal

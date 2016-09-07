@@ -417,6 +417,16 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HMS.DependencyInjection\HMS.DependencyInjection.csproj">
+      <Project>{d298c8e2-28ed-420e-9f11-d55e8df6a25f}</Project>
+      <Name>HMS.DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotel\Hotel.csproj">
+      <Project>{8fab9748-81a3-47b5-9762-ff8a056c6350}</Project>
+      <Name>Hotel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

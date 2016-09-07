@@ -1,6 +1,7 @@
 ﻿using Hotel.Persistence.DbAccess.Interface;
 using System;
 using MongoDB.Driver;
+using Hotel.Domain.Data;
 
 namespace Hotel.Persistence.DbAccess.Implement
 {
