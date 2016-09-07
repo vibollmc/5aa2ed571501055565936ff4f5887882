@@ -1,0 +1,94 @@
+﻿<div class="m-t-md m-b-sm">
+    <strong class="pull-left m-t-sm">Choose the delivery option that suits you</strong>
+
+    <div class="pull-right">
+        <label class="pull-left control-label text-muted m-r-sm m-t-sm">Sort By</label>
+        <ol class="nya-bs-select btn-group bootstrap-select" id="sel-sort-by" ng-model="wzDeliveryCtrl.WzDeliveryModel.sortBy" data-size="5" select-text-format="value" ng-change="wzDeliveryCtrl.sortingServicesList()">
+            <li class="nya-bs-option" ng-repeat="item in wzDeliveryCtrl.WzDeliveryModel.ServiceBestMatchOptions" value='{{item.optionNo|number}}'>
+                <a>
+                    <span>
+                        {{item.optionDesc}}
+                    </span>
+                </a>
+            </li>
+        </ol>
+    </div>
+
+    <div class="clearfix"></div>
+</div>﻿
+
+<div class="table-responsive">
+    <table class="table table-hovered" id="table-services">
+        <thead>
+            <tr>
+                <th class="text-muted" width="1">Provider</th>
+                <th class="text-muted">Pickup Window</th>
+                <th class="text-muted">Delivery Window</th>
+                <th class="text-muted">Cost</th>
+            </tr>
+        </thead>
+        <tbody ng-if="wzDeliveryCtrl.WzDeliveryModel.DisplayAvailableServices.length > 0">
+            <tr ng-repeat-start="service in wzDeliveryCtrl.WzDeliveryModel.DisplayAvailableServices"
+                ng-class="{selected:wzDeliveryCtrl.WzDeliveryModel.SelectedService!=null && wzDeliveryCtrl.WzDeliveryModel.SelectedService.ServiceId === service.ServiceId && wzDeliveryCtrl.WzDeliveryModel.SelectedService.DeliveryWindow.Id === service.DeliveryWindow.Id}"
+                ng-click="wzDeliveryCtrl.selectService(service, $index)">
+                <td class="td-provider-logo">
+                    <img ng-src="{{ wzDeliveryCtrl.getNetworkImage(service.NetWorkInfo) }}" alt="{{wzDeliveryCtrl.getNetworkNameByNetworkInfo(service.NetWorkInfo)}}" width="40" />
+                </td>
+                <td>
+                    <strong>{{wizardCtrl.getDatePlainText(service.CollectionWindow.Date)}}</strong> {{service.CollectionWindow.FromTime | date: wizardCtrl.vm.setting.formatTime}} :: {{service.CollectionWindow.ToTime | date: wizardCtrl.vm.setting.formatTime}}
+                    <!-- Add for QC testing -->
+                    <br />
+                    <em>{{service.ServiceName}}</em>
+                    <!-- End -->
+                </td>
+                <td><strong>{{wizardCtrl.getDatePlainText(service.DeliveryWindow.Date)}}</strong> {{service.DeliveryWindow.FromTime | date:wizardCtrl.vm.setting.formatTime}} :: {{service.DeliveryWindow.ToTime | date: wizardCtrl.vm.setting.formatTime}}</td>
+                <!-- Add for QC testing -->
+                <td><strong class="text-success">{{service.CourierPrice | currency:service.MoneySymbol + ' '}}</strong></td>
+                <!-- End -->
+            </tr>
+            <tr class="selected-expansion"
+                ng-show="wzDeliveryCtrl.WzDeliveryModel.SelectedService!=null && wzDeliveryCtrl.WzDeliveryModel.SelectedService.ServiceId === service.ServiceId && wzDeliveryCtrl.WzDeliveryModel.SelectedService.DeliveryWindow.Id === service.DeliveryWindow.Id">
+                <td></td>
+                <td colspan="3">
+                    <em>
+                        {{service.Description}}
+                    </em>
+                </td>
+            </tr>
+            <tr class="selected-expansion"
+                ng-show="wzDeliveryCtrl.WzDeliveryModel.SelectedService!=null && wzDeliveryCtrl.WzDeliveryModel.SelectedService.ServiceId === service.ServiceId && wzDeliveryCtrl.WzDeliveryModel.SelectedService.DeliveryWindow.Id === service.DeliveryWindow.Id"
+                ng-if="wzDeliveryCtrl.vm.network.isCODEnabled">
+                <td></td>
+                <td colspan="3">
+                    <div class="checkbox pull-left">
+                        <label for="cod{{$index}}">
+                            <input type="checkbox" ng-model="service.IsCoDCollection" id="cod{{$index}}" ng-change="wzDeliveryCtrl.disabledCod(service)" />
+                            Collect cash on delivery (COD) for this item with amount:
+                        </label>
+                    </div>
+                    <div class="input-group pull-right" id="input-group-cod-amount">
+                        <span class="input-group-addon">{{service.MoneySymbol}}</span>
+                        <input type="number" class="form-control" id="txt-cod-amount{{$index}}" name="codAmount" ng-model="service.CoDAmount" ng-disabled="!service.IsCoDCollection" ng-required="service.IsCoDCollection" ng-pattern="/(^\s$)|(^[1-9]{1,1}[0-9]{0,10}$)/" />
+                    </div>
+                </td>
+            </tr>
+            <tr class="selected-expansion"
+                ng-show="wzDeliveryCtrl.WzDeliveryModel.SelectedService!=null && wzDeliveryCtrl.WzDeliveryModel.SelectedService.ServiceId === service.ServiceId && wzDeliveryCtrl.WzDeliveryModel.SelectedService.DeliveryWindow.Id === service.DeliveryWindow.Id"
+                ng-repeat-end="">
+                <td colspan="4">
+                    <button type="button" class="btn btn-success pull-right" ng-disabled="wzDeliveryCtrl.IsProcessing" ng-click="wzDeliveryCtrl.onSubmitSelectService()">
+                        <span>Next </span>
+                        <i ng-class="{'fa fa-spinner fa-spin': wzDeliveryCtrl.IsProcessing , 'fa fa-angle-right': !wzDeliveryCtrl.IsProcessing}"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody ng-if="wzDeliveryCtrl.WzDeliveryModel.DisplayAvailableServices.length == 0">
+            <tr>
+                <td colspan="4">
+                    <span>{{wzDeliveryCtrl.WzDeliveryModel.MessageOnServiceList}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

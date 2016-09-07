@@ -1,0 +1,166 @@
+﻿<form name="wzForm" ng-submit="wzShippingCtrl.onSubmit(wzForm)">
+    <table class="table table-no-border" id="table-shipping-addresses">
+        <tbody>
+            <tr>
+                <td id="td-collect-from">
+                    <div class="form-group">
+                        <h3>Pickup From</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label text-muted">Company Name</label>
+                        <input type="text" class="form-control" name="pickupCompanyName"
+                               ng-model="wzShippingCtrl.vm.pickupContact.companyName"
+                               ng-trim="true" />
+                    </div>
+
+                    <div class="form-group" ng-class="wzForm.pickupContactName.$invalid ? 'has-error' : ''">
+                        <label class="text-muted">Contact Name*</label>
+                        <input type="text" class="form-control" name="pickupContactName"
+                               ng-model="wzShippingCtrl.vm.pickupContact.contactName"
+                               ng-dirty="true"
+                               ng-required="true"
+                               ng-trim="true" />
+                        <div class="alert alert-danger has-error" role="alert"
+                             ng-show="wzForm.pickupContactName.$invalid">
+                            The Contact Name field is required.
+                        </div>
+                    </div>
+
+                    <div class="form-group hide">
+                        <label class="control-label text-muted">Address</label>
+                        <input type="text" class="form-control" disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label text-muted">Unit/House/Block</label>
+                        <input type="text" class="form-control"
+                               ng-model="wzShippingCtrl.vm.pickupContact.address2"
+                               ng-trim="true" />
+                    </div>
+
+                    <div class="form-group" ng-class="wzForm.pickupContactPhone.$invalid ? 'has-error' : ''">
+                        <label class="text-muted">Mobile*</label>
+                        <input type="text" ng-pattern="/^(\+{0,1}[0-9]{6,15})$/" class="form-control" name="pickupContactPhone"
+                               ng-model="wzShippingCtrl.vm.pickupContact.contactPhone"
+                               ng-dirty="true"
+                               ng-required="true"
+                               ng-trim="true" 
+                               ng-model-options="{ 'updateOn': 'default blur' }" />
+                        <div class="alert alert-danger" ng-if="wzShippingCtrl.pickupMobilePhoneHasError() && !((wzForm.$submitted || wzForm.pickupContactPhone.$touched) && wzForm.pickupContactPhone.$invalid)">
+                            <ul>
+                                <li ng-repeat="error in wzShippingCtrl.errorsForPickupMobilePhone()">
+                                    {{error}}
+                                </li>
+                            </ul>
+                        </div>               
+                        <div class="alert alert-danger"
+                             ng-if="wzForm.pickupContactPhone.$invalid">
+                            <span>The Mobile field is required.</span>
+                        </div>
+                    </div>
+                </td>
+                <td id="td-divider">
+                    <div id="divider"></div>
+                    <div id="icon" ng-show="!(wzShippingCtrl.isFormValid = wzForm.$valid)">
+                        <i class="fa fa-chevron-right"></i>
+                    </div>
+                    <div id="icon" ng-show="wzShippingCtrl.isFormValid = wzForm.$valid" class="success">
+                        <i class="fa fa-check"></i>
+                    </div>
+                </td>
+                <td id="td-deliver-to">
+
+                    <div class="form-group">
+                        <h3>Deliver To</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label text-muted">Company Name</label>
+                        <input type="text" class="form-control"
+                               ng-model="wzShippingCtrl.vm.deliveryContact.companyName"
+                               ng-trim="true" />
+                    </div>
+
+                    <div class="form-group" ng-class="wzForm.deliveryContactName.$invalid ? 'has-error' : ''">
+                        <label class="text-muted">Contact Name*</label>
+                        <input type="text" class="form-control" name="deliveryContactName"
+                               ng-model="wzShippingCtrl.vm.deliveryContact.contactName"
+                               ng-dirty="true"
+                               ng-required="true"
+                               ng-model-options="{ 'updateOn': 'default blur' }"
+                               ng-trim="true" />
+                        <div class="alert alert-danger has-error" role="alert"
+                             ng-if="wzForm.deliveryContactName.$invalid">
+                            <span>The Contact Name field is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label text-muted">Unit/House/Block</label>
+                        <input type="text" class="form-control"
+                               ng-model="wzShippingCtrl.vm.deliveryContact.address2"
+                               ng-trim="true" />
+                    </div>
+
+                    <div class="form-group" ng-class="wzForm.deliveryContactPhone.$invalid ? 'has-error' : ''">
+                        <label class="text-muted">Mobile*</label>
+                        <input type="text" ng-pattern="/^(\+{0,1}[0-9]{6,15})$/" class="form-control" name="deliveryContactPhone"
+                               ng-model="wzShippingCtrl.vm.deliveryContact.contactPhone"
+                               ng-dirty="true"
+                               ng-required="true"
+                               ng-trim="true"
+                               ng-model-options="{ 'updateOn': 'default blur' }" />
+                        <div class="alert alert-danger" ng-if="wzShippingCtrl.deliveryMobilePhoneHasError() && !((wzForm.$submitted || wzForm.deliveryContactPhone.$touched) && wzForm.deliveryContactPhone.$invalid)">
+                            <ul>
+                                <li ng-repeat="error in wzShippingCtrl.errorsForDeliveryMobilePhone()">
+                                    {{error}}
+                                </li>
+                            </ul>
+                            <span>{{error}}</span>
+                        </div>
+                        <div class="alert alert-danger"
+                             ng-if="wzForm.deliveryContactPhone.$invalid">
+                            <span>The Mobile field is required.</span>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="form-group" ng-repeat="property in wzShippingCtrl.vm.CustomProperties">
+                        <label class="control-label text-muted">{{property.Title}}</label>
+                        <ng-include src="wzShippingCtrl.createCustomView(property.Type)"></ng-include>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="form-group">
+                        <label class="control-label text-muted">Message (optional)</label>
+                        <textarea class="form-control" rows="5"
+                                  ng-model="wzShippingCtrl.vm.message"
+                                  ng-trim="true"></textarea>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="navigation-buttons">
+        <div class="pull-left">
+            <button type="button" class="btn btn-link text-muted"
+                    ng-click="wzShippingCtrl.go('wizard.delivery', false)">
+                <i class="fa fa-angle-left"></i>
+                <span>Choose Delivery Options</span>
+            </button>
+        </div>
+        <div class="pull-right">
+            <button type="submit" class="btn btn-success">
+                <span>Next</span>
+                <i class="fa fa-angle-right"></i>
+            </button>
+        </div>
+    </div>
+</form>

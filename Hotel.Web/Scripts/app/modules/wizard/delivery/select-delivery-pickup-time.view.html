@@ -1,0 +1,42 @@
+﻿<!-- Time -->
+<div id="table-time">
+    <div class="row" ng-if="!model.hasPickupTime">
+        <div class="col-sm-6"><label class="control-label text-muted">Delivery Time</label></div>
+    </div>
+    <div class="row" ng-if="!model.hasPickupTime">
+        <div class="col-sm-6">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-change="model.selectDeliveryDate()" uib-datepicker-popup="{{model.format}}" ng-model="vm.deliveryDate" is-open="model.pickerStatus.openedDelivery" min-date="model.minDateDelivery" max-date="model.maxDateDelivery" date-disabled="model.disabledDate(date, mode)" ng-required="true" close-text="Close" />
+                <span class="input-group-addon" ng-click="model.openPicker($event, model.type.delivery)">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <ionslider type="double" prettify_enabled="true" min="timeSlider.floor" max="timeSlider.ceil" from="vm.deliveryTimeFrom" to="vm.deliveryTimeTo" prettify="timeSlider.translate" step="0.5"
+                       on-finish="model.getTimeDelivery"></ionslider>
+        </div>
+    </div>
+    <div class="row" ng-if="!model.hasPickupTime">
+        <!-- By default pickup time is today -->
+        <div class="col-sm-6" ng-click="model.hasPickupTime=true"><a>Set Pickup Time</a></div>
+    </div>
+
+    <div class="row" ng-if="model.hasPickupTime">
+        <div class="col-sm-6"><label class="control-label text-muted">Pickup Time*</label></div>
+    </div>
+    <div class="row" ng-if="model.hasPickupTime">
+        <div class="col-sm-6">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-change="model.selectPickupDate()" uib-datepicker-popup="{{model.format}}" ng-model="vm.pickupDate" is-open="model.pickerStatus.openedPickup" min-date="model.minDatePickup" max-date="model.maxDatePickup" date-disabled="model.disabledDatePickUp(date, mode)" ng-required="true" close-text="Close" />
+                <span class="input-group-addon" ng-click="model.openPicker($event,model.type.pickup)">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <ionslider grid="true" type="single" prettify_enabled="true" min="timeSlider.floor" max="timeSlider.ceil" from="vm.pickupTimeFrom" to="vm.pickupTimeTo" prettify="timeSlider.translate" step="0.5" on-finish="model.getTimePickup" from-min="model.fromMinPickupTime" to-max="model.toMaxPickupTime"></ionslider>
+        </div>
+    </div>
+
+</div>

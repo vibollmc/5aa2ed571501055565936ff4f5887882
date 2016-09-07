@@ -1,0 +1,50 @@
+﻿
+<div class="modal inmodal fade modal-ru modal-ru-form" id="{{ modalId }}" tabindex="-1">
+    <div class="modal-dialog {{ modalStyle.modalSize }}">
+        <div class="modal-content">
+            <form class="form-horizontal" name="modalForm" validate>
+                <div id="modal-async">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ title }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group" ng-repeat="row in modalData track by $index" ng-switch on="row.rowType">
+                            <div ng-switch-default>
+                                <label class="control-label {{modalStyle.modalLeftStyle}}">
+                                    {{ row.label }}<span ng-show="row.inputValidation.isRequired" class="required" aria-required="true">*</span>
+                                </label>
+                                <div class="{{modalStyle.modalRightStyle}}">
+                                    <div ng-if="row.inputValidation.inputType !== 'select'">
+                                        <input class="form-control" data-val="true" data-val-required="This field is required."
+                                               ng-pattern="row.inputValidation.validatePattern" ng-class="{'error': modalForm[row.fieldName].$invalid && modalForm[row.fieldName].$dirty }"
+                                               name="{{ row.fieldName }}" type="{{ row.inputValidation.inputType }}"
+                                               ng-model="objectModel[row.fieldName]" ng-required="{{row.inputValidation.isRequired}}">
+                                    </div>
+                                    <div ng-if="row.inputValidation.inputType === 'select'">
+                                        <select class="form-control " data-val="true"
+                                                ng-class="{'error': modalForm[row.fieldName].$invalid && modalForm[row.fieldName].$dirty }"
+                                                ng-model="objectModel[row.fieldName]" ng-required="{{row.inputValidation.isRequired}}"
+                                                data-val-required="The Role field is required." id="Role" name="{{ row.fieldName }}">
+                                            <option ng-repeat="option in row.objectValue" value="{{option.value}}">{{option.text}}</option>
+                                        </select>
+                                    </div>
+                                    <span class="field-validation-valid" data-valmsg-for="{{ row.fieldName }}" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group btn-group-justified">
+                            <div class="btn-group">
+                                <button type="submit" class="btn {{ modalStyle.confirmButtonStyle }}" ng-click="submit(modalForm.$valid)">{{ submitLabel }}</button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">{{ closeLabel }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

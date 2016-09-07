@@ -1,0 +1,53 @@
+﻿<ul class="nav nav-tabs m-b-lg" role="tablist">
+    <li role="presentation" class="active" ui-sref="wizard.payment.card">
+        <a href="#tab-card-payment" role="tab" data-toggle="tab">Credit Card / PayPal</a>
+    </li>
+    <li role="presentation" ui-sref="wizard.payment.postpaid">
+        <a href="#tab-postpaid-payment" role="tab" data-toggle="tab">Postpaid Account</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="tab-card-payment">
+        <ui-view name="cards">
+        </ui-view>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tab-postpaid-payment">
+        <ui-view name="postpay">
+        </ui-view>
+    </div>
+</div>
+
+<div class="m-b-lg" ng-if="wzPaymentCtrl.vm.CompletionProcessList!=null && wzPaymentCtrl.vm.CompletionProcessList.length>0">
+    <h3>Completion Process</h3>
+    <div class="m-t m-b" ng-repeat="item in wzPaymentCtrl.vm.CompletionProcessList  | orderBy:'Order'" ng-if="item.SettingEnabled">
+        <span class="pull-left">{{item.CompletionProcessTypeName()}}</span>
+        <span class="pull-right text-muted" ng-if="item.IsLocked">Required</span>
+        <span class="pull-right chk-toggle-ru chk-toggle-ru-square chk-toggle-ru-{{item.IsEnabled?'success':'uncheck'}}" ng-if="!item.IsLocked">
+            <span class="fa fa-check" ng-click="item.IsEnabled=true"></span>
+            <span class="fa fa-times" ng-click="item.IsEnabled=false"></span>
+        </span>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="navigation-buttons">
+    <div class="pull-left">
+        <button type="button" class="btn btn-link text-muted"
+                ng-click="wzPaymentCtrl.go('wizard.shipping', false)">
+            <i class="fa fa-angle-left"></i>
+            <span>Shipping Information</span>
+        </button>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-success"
+                ng-show="wzPaymentCtrl.vm.isValidSelectedMethod && wzPaymentCtrl.IsNotEnoughPostPaidBalance && wzPaymentCtrl.vm.couponLoading == false"
+                ng-disabled="wzPaymentCtrl.IsProcessing"                
+                ng-click="wzPaymentCtrl.confirmPayment()">
+            <span>Confirm Payment</span>
+            <i ng-class="{'fa fa-spinner fa-spin': wzPaymentCtrl.IsProcessing, 'fa fa-angle-right': !wzPaymentCtrl.IsProcessing}"></i>
+        </button>
+    </div>
+</div>
+
+<div ui-view="select-coupon"></div>

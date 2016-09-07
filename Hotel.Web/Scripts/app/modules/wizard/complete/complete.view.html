@@ -1,0 +1,28 @@
+﻿<h2 class="m-b-lg">Thank you!</h2>
+<p class="m-b-md">
+    Thank you for your booking through {{ wzCompleteCtrl.vm.netWorkName }}!<br />
+    Your payment has been processed.
+</p>
+<p class="m-b-md">In the very unlikely event that there are issues with your delivery, you can contact {{ wzCompleteCtrl.vm.netWorkName }} quoting the following details. (We have also sent them to you in an email.)</p>
+<p>
+    <strong>Quick Reference: </strong><span>{{ wzCompleteCtrl.vm.delivery.QuickReferenceNumber }}</span>
+    <br />
+    <strong>Delivery: </strong><span>{{ wzCompleteCtrl.vm.delivery.TrackingNumber }}</span>
+</p>
+<div ng-show="wzCompleteCtrl.IsResellingService">
+    <p>This service is provided by {{wzCompleteCtrl.ResellingNetwork.Name}}, a partner of {{ wzCompleteCtrl.vm.netWorkName }}</p>
+    <table class="table-Redbox-information">
+        <tbody>
+            <tr>
+                <td>
+                    <img class="img-logo" ng-src="{{ wzCompleteCtrl.ResellingNetwork.TlnLogoUrl }}" />
+                </td>
+                <td>
+                    <strong>{{wzCompleteCtrl.ResellingNetwork.Name}}</strong>
+                    <br />
+                    <span>{{wzCompleteCtrl.ResellingNetwork.Phone}}<br />{{wzCompleteCtrl.ResellingNetwork.Address}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

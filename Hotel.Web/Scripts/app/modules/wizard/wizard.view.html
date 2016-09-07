@@ -1,0 +1,89 @@
+﻿<div class="row white-bg border-bottom page-headings">
+    <div class="page-heading heading-main">
+        <div class="col-md-12">
+            <div class="breadcrumb-wrapper">
+                <i class="fa fa-truck"></i>
+                <ol class="breadcrumb m-l-sm">
+                    <li class="active">New Delivery</li>
+                </ol>
+            </div>
+            <div class="table-responsive pull-right heading-actions-wrapper">
+                <div class="heading-actions">
+                    <div class="heading-action">
+                        <a class="btn btn-white" href="/Bulk">
+                            <i class="fa fa-copy"></i>
+                            <span>Batch Delivery</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="fh-breadcrumb">
+    <div class="full-height">
+        <div class="full-height-scroll" perfectscroll>
+            <div class="element-detail-box">
+                <div class="ibox" id="ibox-delivery-request">
+                    <div class="ibox-title">
+                        <h3>{{ wizardCtrl.vm.stepTitle }}</h3>
+                        <ul class="wizard-steps">
+                            <li class="wizard-step"
+                                ng-click="wizardCtrl.navigate(wizardCtrl.vm.StepType.ChooseDelivery, 'wizard.delivery')"
+                                ng-class="wizardCtrl.getCssClass(wizardCtrl.vm.StepType.ChooseDelivery)">
+                                <span class="wizard-step-num"><i class="fa fa-pencil-square-o"></i></span>
+                            </li>
+                            <li class="wizard-step"
+                                ng-click="wizardCtrl.navigate(wizardCtrl.vm.StepType.ShipInformation, 'wizard.shipping')"
+                                ng-class="wizardCtrl.getCssClass(wizardCtrl.vm.StepType.ShipInformation)">
+                                <span class="wizard-step-num"><i class="fa fa-list"></i></span>
+                            </li>
+                            <li class="wizard-step"
+                                ng-click="wizardCtrl.navigate(wizardCtrl.vm.StepType.Payment, 'wizard.payment')"
+                                ng-class="wizardCtrl.getCssClass(wizardCtrl.vm.StepType.Payment)">
+                                <span class="wizard-step-num"><i class="fa fa-money"></i></span>
+                            </li>
+                            <li class="wizard-step"
+                                ng-class="wizardCtrl.getCssClass(wizardCtrl.vm.StepType.Complete)">
+                                <span class="wizard-step-num"><i class="fa fa-user"></i></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-8 col-main p-md">
+                                <!-- Main content -->
+                                <div ui-view></div>
+                            </div>
+                            <div class="col-md-4 col-summary p-md" ng-include="'scripts/app/modules/wizard/summary.view.html'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'scripts/app/modules/wizard/modal.view.html'">
+
+</div>
+
+
+<div class="modal inmodal fade" id="modal-please-wait" data-backdrop="static" data-keyboard="false" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Please Wait...</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

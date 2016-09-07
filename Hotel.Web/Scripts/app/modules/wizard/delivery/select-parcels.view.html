@@ -1,0 +1,169 @@
+﻿ <!-- Parcels Table -->
+<div id="table-parcels">
+    <div class="row">
+        <div class="col-xs-6">
+            <label class="control-label text-muted">
+                Parcel Type*
+                <!--<i class="fa fa-question-circle"></i>-->
+            </label>
+        </div>
+        <div class="col-xs-3">
+            <label class="control-label text-muted">Quantity*</label>
+        </div>
+    </div>
+    <form name="formParcelTemplate" novalidate>
+        <div ng-include="'ParcelsTemplate'"></div>
+    </form>
+    <div class="row">
+        <div class="col-xs-6">
+            <a class="btn btn-white btn-block" id="btn-add-more-parcel" ng-click="wzDeliveryCtrl.addParcel()">
+                <i class="fa fa-plus"></i>
+                <span>Add more...</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ParcelsTemplate">
+    <div class="row" ng-repeat="parcel in wzDeliveryCtrl.parcelSelect track by $index">
+        <div class="col-xs-6">
+            <ol class="nya-bs-select btn-group bootstrap-select"
+                ng-model="wzDeliveryCtrl.parcelSelect[$index]"
+                ng-change="wzDeliveryCtrl.selectParcel()"
+                data-size="10"
+                title="Select parcel type"
+                id="sel-parcel-type">
+                <li class="nya-bs-option {{ wzDeliveryCtrl.parcelSelect.indexOf(parcel.id)>-1?'disabled hide':''}}" ng-repeat="parcel in wzDeliveryCtrl.vm.parcels" value="{{parcel.id}}">
+                    <a>
+                        <span>
+                            <img ng-show="parcel.icon!=null" src='{{parcel.icon.uri}}' width='20' class='m-r-xs' />
+                            <span>{{parcel.name}}</span>&nbsp;<span ng-show="parcel.dimension!=null">({{parcel.dimension.length}}{{parcel.dimension.units==1?'cm':'in'}}&nbsp;&times;&nbsp;{{parcel.dimension.width}}{{parcel.dimension.units==1?'cm':'in'}}&nbsp;&times;&nbsp;{{parcel.dimension.height}}{{parcel.dimension.units==1?'cm':'in'}})</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li data-toggle='modal' ng-click="wzDeliveryCtrl.parcelSelectIndex = $index" data-target='#modal-custom-parcel'>
+                    <a>
+                        <span>Add your custom parcel...</span>
+                    </a>
+                </li>
+            </ol>
+        </div>
+        <div class="col-xs-3">
+            <input type="number" ng-pattern="/^[0-9]{1,10}$/"
+                   class="form-control txt-quantity" min="1"
+                   ng-model="wzDeliveryCtrl.quantityParcelSelect[$index]"
+                   ng-change="wzDeliveryCtrl.selectParcel()"
+                   ng-model-options="{updateOn: 'default blur', debounce: {'default': 1000, 'blur': 0}}" />
+            <div class="alert alert-danger has-error" role="alert"
+                 ng-show="wzDeliveryCtrl.quantityParcelSelect[$index] == null">
+                Should be integer number
+                Quantity must be greater than or equal 1.
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <a class="btn btn-link btn-link-danger" ng-click="wzDeliveryCtrl.removeParcel($index)" ng-show="wzDeliveryCtrl.parcelSelect.length>1">
+                <i class="fa fa-remove"></i>
+                <span>Remove</span>
+            </a>
+        </div>
+    </div>
+
+</script>
+
+
+<div class="modal inmodal fade modal-ru modal-ru-form" id="modal-custom-parcel" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Custom Parcel</h4>
+            </div>
+            <form name="formAddParcel" novalidate>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label text-muted">Name</label>
+                                <input type="text" class="form-control" value="2" ng-model="wzDeliveryCtrl.WzDeliveryModel.customParcel.name" name="name" required />
+                                <div ng-show="formAddParcel.$submitted || formAddParcel.name.$touched">
+                                    <div ng-show="formAddParcel.name.$invalid" class="{{formAddParcel.name.$invalid?'field-validation-error':''}}">Name is required.</div>
+                                </div>
+                            </div>
+                            <!--<div class="form-group">
+                                <label class="control-label text-muted">Quantity</label>
+                                <input type="number" ng-pattern="/^[0-9]{0,10}$/" class="form-control" name="quantity" min="1" required ng-model="wzDeliveryCtrl.WzDeliveryModel.customParcel.quantity" />
+                                <div ng-show="formAddParcel.$submitted || formAddParcel.quantity.$touched">
+                                    <div ng-show="formAddParcel.quantity.$invalid" class="{{(formAddParcel.quantity.$invalid)?'field-validation-error':''}}">Quantity must be greater than or equal to 1.</div>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label text-muted">Unit</label>
+                                <ol class="nya-bs-select btn-group bootstrap-select" id="sel-unit" ng-model="wzDeliveryCtrl.WzDeliveryModel.customParcel.units" name="unit" required>
+                                    <li class="nya-bs-option" ng-repeat="unit in wzDeliveryCtrl.vm.units" value='{{unit.id|number}}'>
+                                        <a>
+                                            {{unit.name}}
+                                        </a>
+                                    </li>
+                                </ol>
+                                <div ng-show="formAddParcel.$submitted || formAddParcel.unit.$touched">
+                                    <div ng-show="formAddParcel.unit.$invalid" class="{{formAddParcel.unit.$invalid?'field-validation-error':''}}">Weight must be greater than or equal to 1.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label text-muted">Weight</label>
+                                <div class="input-group">
+                                    <input type="number" ng-pattern="/^[0-9]{0,10}$/" class="form-control" min="1" ng-model="wzDeliveryCtrl.WzDeliveryModel.customParcel.weight" name="weight" required />
+                                    <span class="input-group-addon">Kg</span>
+                                </div>
+                                <div ng-show="formAddParcel.$submitted || formAddParcel.weight.$touched">
+                                    <div ng-show="formAddParcel.weight.$invalid" class="{{(formAddParcel.weight.$invalid)?'field-validation-error':''}}">Weight must be greater than or equal to 1.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-t-md">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label text-muted">Width</label>
+                                <input type="number" class="form-control" ng-pattern="/^[0-9]{0,10}$/" required min="1" ng-model="wzDeliveryCtrl.WzDeliveryModel.customParcel.width" name="width" />
+                                <div ng-show="formAddParcel.$submitted || formAddParcel.width.$touched">
+                                    <div ng-show="formAddParcel.width.$invalid" class="{{(formAddParcel.width.$invalid)?'field-validation-error':''}}">Width must be greater than or equal to 1.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label text-muted">Height</label>
+                                <input type="number" class="form-control" ng-pattern="/^[0-9]{0,10}$/" required min="1" ng-model="wzDeliveryCtrl.WzDeliveryModel.customParcel.height" name="height" />
+                                <div ng-show="formAddParcel.$submitted || formAddParcel.height.$touched">
+                                    <div ng-show="formAddParcel.height.$invalid" class="{{(formAddParcel.height.$invalid)?'field-validation-error':''}}">Height must be greater than or equal to 1.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label text-muted">Length</label>
+                                <input type="number" class="form-control" ng-pattern="/^[0-9]{0,10}$/" required min="1" ng-model="wzDeliveryCtrl.WzDeliveryModel.customParcel.length" name="length" />
+                                <div ng-show="formAddParcel.$submitted || formAddParcel.length.$touched">
+                                    <div ng-show="formAddParcel.length.$invalid" class="{{(formAddParcel.length.$invalid)?'field-validation-error':''}}">Length must be greater than or equal to 1.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-success" ng-click="wzDeliveryCtrl.addCustomParcel()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 
