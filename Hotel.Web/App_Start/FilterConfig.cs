@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Hotel.Web
+namespace HMS.Web.Main
 {
     public class FilterConfig
     {

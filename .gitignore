@@ -8,3 +8,5 @@
 /Hotel.Domain/bin
 /Hotel.Persistence/bin
 /Hotel.Persistence/obj
+/HMS.DependencyInjection/bin
+/HMS.DependencyInjection/obj

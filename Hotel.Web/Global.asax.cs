@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Hotel.Web
+namespace HMS.Web.Main
 {
     public class MvcApplication : System.Web.HttpApplication
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace Hotel.Web
+namespace HMS.Web.Main
 {
     public static class WebApiConfig
     {
