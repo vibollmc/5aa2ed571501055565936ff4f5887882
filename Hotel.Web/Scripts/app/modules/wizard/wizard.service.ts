@@ -1,4 +1,4 @@
-﻿/// <reference path="../../../app/shared/services/api.service.d.ts" />
+﻿/// <reference path="../../../app/shared/services/api.service.ts" />
 
 module NewWizard {
     'use strict';

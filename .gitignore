@@ -12,3 +12,16 @@
 /HMS.DependencyInjection/obj
 /Hotel/obj
 /Hotel/bin
+/Hotel.Web/Scripts/app/*.js
+/Hotel.Web/Scripts/app/shell/*.js
+/Hotel.Web/Scripts/app/shared/services/*.js
+/Hotel.Web/Scripts/app/shared/filters/*.js
+/Hotel.Web/Scripts/app/shared/directives/modal/*.js
+/Hotel.Web/Scripts/app/modules/wizard/*.js
+/Hotel.Web/Scripts/app/modules/wizard/complete/*.js
+/Hotel.Web/Scripts/app/modules/wizard/delivery/*.js
+/Hotel.Web/Scripts/app/modules/wizard/payment/*.js
+/Hotel.Web/Scripts/app/modules/wizard/payment.card/*.js
+/Hotel.Web/Scripts/app/modules/wizard/payment.postpaid/*.js
+/Hotel.Web/Scripts/app/modules/wizard/shared/directives/*.js
+/Hotel.Web/Scripts/app/modules/wizard/shipping/*.js

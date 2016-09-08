@@ -1,6 +1,6 @@
 ﻿namespace Hotel.Persistence
 {
-    public class MongoDBCollectionName
+    public class MongoDbCollectionName
     {
         public const string User = "User";
         public const string RoomType = "RoomType";

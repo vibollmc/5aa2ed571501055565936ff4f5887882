@@ -1,4 +1,6 @@
-﻿module Main {
+﻿/// <reference path="shell/startup.ts" />
+
+module Main {
     'use strict';
 
     declare var define: any;

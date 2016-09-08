@@ -22,60 +22,39 @@ namespace Hotel.Persistence
 
         public async Task<IEnumerable<RoomType>> GetRoomType(string filterString)
         {
-            try
-            {
-                var collection = _readDataContextFactory.CreateMongoDbReadContext().GetCollection<RoomType>(MongoDBCollectionName.RoomType);
-                var filter = Builders<RoomType>.Filter.Where(x => x.Name.Contains(filterString));
+            var collection = _readDataContextFactory.CreateMongoDbReadContext().GetCollection<RoomType>(MongoDbCollectionName.RoomType);
+            var filter = Builders<RoomType>.Filter.Where(x => x.Name.Contains(filterString));
 
-                return await collection.Find(filter).ToListAsync();
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+            return await collection.Find(filter).ToListAsync();
         }
 
         public async Task<bool> SaveRoomType(RoomType roomType)
         {
-            try
+            var collection = _writeDataContextFactory.CreateMongoDbWriteContext().GetCollection<RoomType>(MongoDbCollectionName.RoomType);
+            var filter = Builders<RoomType>.Filter.Eq(x => x.Id, roomType.Id);
+
+            var type = await collection.Find(filter).FirstOrDefaultAsync();
+
+            if (type != null)
             {
-                var collection = _writeDataContextFactory.CreateMongoDbWriteContext().GetCollection<RoomType>(MongoDBCollectionName.RoomType);
-                var filter = Builders<RoomType>.Filter.Eq(x => x.Id, roomType.Id);
-
-                var type = await collection.Find(filter).FirstOrDefaultAsync();
-
-                if (type != null)
-                {
-                    await collection.ReplaceOneAsync(filter, roomType);
-                    return true;
-                }
-
-                await collection.InsertOneAsync(roomType);
-
+                await collection.ReplaceOneAsync(filter, roomType);
                 return true;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            await collection.InsertOneAsync(roomType);
+
+            return true;
         }
 
         public async Task<bool> UpdateStatus(string id, Status status)
         {
-            try
-            {
-                var collection = _writeDataContextFactory.CreateMongoDbWriteContext().GetCollection<RoomType>(MongoDBCollectionName.RoomType);
-                var filter = Builders<RoomType>.Filter.Eq(x => x.Id.ToString(), id);
-                var update = Builders<RoomType>.Update.Set(x => x.Status, status);
+            var collection = _writeDataContextFactory.CreateMongoDbWriteContext().GetCollection<RoomType>(MongoDbCollectionName.RoomType);
+            var filter = Builders<RoomType>.Filter.Eq(x => x.Id.ToString(), id);
+            var update = Builders<RoomType>.Update.Set(x => x.Status, status);
 
-                await collection.UpdateOneAsync(filter, update);
+            await collection.UpdateOneAsync(filter, update);
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return true;
         }
     }
 }
