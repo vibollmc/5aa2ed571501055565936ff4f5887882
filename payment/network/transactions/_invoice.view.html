@@ -1,0 +1,75 @@
+﻿<form id="invoice" class="modal fade" role="dialog" name="inv">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="modal-sync">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Invoice</h4>
+                </div>
+                <div class="modal-body form-horizontal">
+                    <div class="form-group">
+                        <span class="col-md-3">Network</span>
+                        <span class="col-md-9">{{transactionCtrl.vm.invoice.Network}}</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-3">Invoice No</span>
+                        <span class="col-md-9">{{transactionCtrl.vm.invoice.Number}}</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-3">Payment method</span>
+                        <div class="col-md-9">
+                            <img ng-src="{{transactionCtrl.vm.invoice.PaymentMethod.ImageUrl}}" ng-show="transactionCtrl.vm.invoice.PaymentMethod.ImageUrl"/>
+                            <span>{{transactionCtrl.vm.invoice.PaymentMethod.Name}}</span>    
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Ordered by</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="width: 100%;" ng-repeat="ivnTrans in transactionCtrl.vm.invoice.Transactions">
+                                        <td>
+                                            {{ivnTrans.DeliveryTrackingNumber}}
+                                        </td>
+                                        <td>
+                                            {{ivnTrans.UserName}}
+                                        </td>
+                                        <td>
+                                            <div ng-class="transactionCtrl.getTypeClass(ivnTrans.TypeString, 'text')">{{ivnTrans.TypeString}}</div>
+                                        </td>
+                                        <td>
+                                            {{transactionCtrl.vm.invoice.NetworkCurrency}} {{ivnTrans.Amount|number:2}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-3">Sub Total</span>
+                        <span class="col-md-9">{{transactionCtrl.vm.invoice.NetworkCurrency}} {{transactionCtrl.vm.invoice.SubTotal|number:2}}</span>
+                    </div>
+                    <div class="form-group" ng-if="transactionCtrl.vm.invoice.Vat > 0">
+                        <span class="col-md-3">VAT {{transactionCtrl.vm.invoice.Vat|number:2}}%</span>
+                        <span class="col-md-9">{{transactionCtrl.vm.invoice.NetworkCurrency}} {{transactionCtrl.vm.invoice.TaxAmount|number:2}}</span>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-md-3">Total</span>
+                        <span class="col-md-9">{{transactionCtrl.vm.invoice.NetworkCurrency}} {{transactionCtrl.vm.invoice.Total|number:2}}</span>
+                    </div>
+                </div>
+                <div class="modal-footer" id="container-submit">
+                    <button id="add-merchant-account-cancel" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
