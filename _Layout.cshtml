@@ -1,0 +1,221 @@
+﻿@using RocketUncle.Web.Common.Tenancy
+
+@{
+    var tenantContext = TenantManager.Do(Request.RequestContext.HttpContext).Tenant;
+}
+
+@{
+    var singleUrl = Url.Action("Index", "Wizard", new { area = "" });
+    var batchUrl = Url.Action("Index", "Bulk", new { area = "" });
+
+    if (tenantContext.Network.EnableNewDeliveryWizard)
+    {
+        singleUrl = Url.Action("Index", "NewWizard", new { area = "" });
+    }
+
+    bool isSPA = ViewBag.isSPA != null && ViewBag.isSPA;
+
+    var ngAppnonSPA = !isSPA ? "ng-app=RocketUncleApp" : "";
+}
+
+<!DOCTYPE html>
+<html @ngAppnonSPA>
+<head>
+    @Html.Partial("Layouts/Shared/_Head")
+
+    <script src="~/Vendor/jquery/dist/jquery.min.js"></script>
+    <script src="~/Vendor/jquery-ui/jquery-ui.min.js"></script>
+
+    <link href="~/Vendor/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Vendor/toastr/toastr.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Vendor/bootstrap-select/dist/css/bootstrap-select.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Vendor/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" type="text/css" rel="stylesheet" />
+    <link href="~/Vendor/bootstrap-daterangepicker/daterangepicker.css" type="text/css" rel="stylesheet" />
+    <link href="~/Vendor/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Vendor/iCheck/skins/all.css" type="text/css" rel="stylesheet" />
+    <link href="~/Vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" type="text/css" rel="stylesheet"/>
+    <link href="~/Vendor/chartist/dist/chartist.min.css" type="text/css" rel="stylesheet" />
+    @RenderSection("pluginStyles", false)
+    @Styles.Render("~/Content/css/inspinia")
+    @Styles.Render("~/Content/css/pages/common")
+    @RenderSection("customStyles", false)
+</head>
+<body class="fixed-sidebar full-height-layout">
+    <!-- Top navbar -->
+    @Html.Partial("Layouts/LayoutWithSidebar/_TopNavbar")
+
+    <!-- Wrapper-->
+    <div id="wrapper">
+
+        <!-- Left sidebar -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <a class="close-canvas-menu">
+                <i class="fa fa-times"></i>
+            </a>
+
+            <div class="nav-button">
+                <div class="nav-button-inner">
+                    <div class="btn-group" id="btn-group-order">
+                        <a class="btn btn-sm" href="@singleUrl" onclick="transitionToSingleDelivery(event, this, 'wizard', '/wizard/complete')">
+                            <i class="fa fa-plus"></i>
+                            <span class="btn-caption">Delivery Request</span>
+                        </a>
+                        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="@singleUrl" onclick="transitionToSingleDelivery(event, this, 'wizard', '/wizard/complete')">Single Delivery Request</a></li>
+                            <li><a href="@batchUrl">Batch Delivery Request</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-sidebars">
+                @Html.Partial("Layouts/LayoutWithSidebar/_PrimarySidebar")
+
+                @if (ViewBag.SecondarySidebar == true)
+                {
+                    @RenderSection("secondarySidebar", false)
+                }
+            </div>
+
+            <div class="sidebar-footer small">
+                Zyllem &copy; 2015
+            </div>
+        </nav>
+
+        <!-- Page wrapper -->
+        <div id="page-wrapper" class="gray-bg">
+            @if (isSPA)
+            {
+                <div ui-view class="right-sidebar-affect"></div>
+            }
+            else
+            {
+                <div class="right-sidebar-affect">
+
+                    @{
+                        var borderCls = ViewBag.HideHeading != true ? "border-bottom" : "";
+                    }
+
+                    <div class="row white-bg @borderCls page-headings">
+                        <!-- Page title and breadcrumb -->
+                        @if (ViewBag.HideHeading != true)
+                        {
+                            <div class="page-heading heading-main">
+                                <div class="col-md-12">
+                                    <div class="breadcrumb-wrapper">
+                                        @Html.Partial("Layouts/Shared/_Breadcrumb")
+                                    </div>
+
+                                    @if (ViewBag.HeadingActions == true)
+                                    {
+                                        <div class="table-responsive pull-right heading-actions-wrapper">
+                                            <div class="heading-actions">
+                                                @RenderSection("headingActions", false)
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        }
+
+                        <!-- Heading notifications -->
+                        @Html.Partial("Layouts/LayoutWithSidebar/_HeadingNotifications", TempData.NotificationGroups())
+
+                        <!-- Expansion -->
+                        @if (ViewBag.ExpandHeading == true)
+                        {
+                            <div class="page-heading heading-expansion">
+                                @RenderSection("headingExpansion", false)
+                            </div>
+                        }
+
+                        <!-- Page tabs -->
+                        @if (ViewBag.PageTabs == true)
+                        {
+                            <ul class="nav nav-tabs page-tabs">
+                                @RenderSection("pageTabs", false)
+                            </ul>
+                        }
+                    </div>
+
+                    <!-- Main view -->
+                    <div class="fh-breadcrumb">
+                        @RenderSection("fhColumn", false)
+                        <div class="full-height">
+                            <div class="full-height-scroll">
+                                <div class="element-detail-box">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Loyalty program popup -->
+            @if (tenantContext.Network.EnableTieredPricing && (ViewBag.IsWelcome == null || !ViewBag.IsWelcome))
+            {
+                @Html.Partial("~/Views/Welcome/_LoyaltyProgram.Popup.cshtml")
+            }            
+            <!-- End Loyalty program popup -->
+
+        </div>
+        <!-- End page wrapper-->
+        <!-- Right Sidebar -->
+        @Html.Partial("Layouts/LayoutWithSidebar/_RightSidebar")
+
+    </div>
+    <!-- End wrapper-->
+    <!-- Common modal -->
+    @Html.Partial("Layouts/Shared/_Modal")
+    <script src="~/Vendor/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/Vendor/iCheck/icheck.min.js"></script>
+    <script src="~/Vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Vendor/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Vendor/knockout/dist/knockout.js"></script>
+    <script src="~/Vendor/moment/min/moment.min.js"></script>
+    <script src="~/Vendor/pace/pace.min.js"></script>
+    <script src="~/Vendor/toastr/toastr.min.js"></script>
+    <script src="~/Vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="~/Vendor/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+    <script src="~/Vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/Vendor/ionrangeslider/js/ion.rangeSlider.min.js"></script>
+    <script src="~/Vendor/Microsoft.jQuery.Unobtrusive.Ajax/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="~/Vendor/chartist/dist/chartist.js"></script>
+    <script src="~/Vendor/chartist-plugin-fill-donut/dist/chartist-plugin-fill-donut.js"></script>
+    
+    <script src="~/Vendor/pace/pace.min.js"></script>
+    @Scripts.Render("~/bundles/inspinia")
+
+    <script src="~/Vendor/signalr/jquery.signalR.min.js"></script>
+    @Scripts.Render("~/bundles/signalR")
+    <script src="/signalr/hubs"></script>
+
+    <script src="~/Vendor/angular/angular.min.js"></script>
+    <script src="~/Vendor/angular-ui-sortable/sortable.min.js"></script>
+
+    @Scripts.Render("~/angular/app")
+    @Scripts.Render("~/angular/controllers/Notification")
+    @Scripts.Render("~/angular/factories/NotificationSignalr")
+    @if (tenantContext.Network.EnableTieredPricing)
+    {
+        @Scripts.Render("~/bundles/boardranking")
+    }
+    @RenderSection("scripts", false)
+    @Scripts.Render("~/bundles/common")
+
+    <!-- Notifications -->
+    @Html.Partial("Layouts/Shared/_Notification", TempData.Notifications())
+
+    @if (isSPA)
+    {
+        <script type="text/javascript" src="@Url.Content("/Vendor/requirejs/require.js")" data-main="@Url.Content("/Scripts/app/main.js")"></script>
+    }
+</body>
+</html>

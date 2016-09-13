@@ -17,14 +17,9 @@ module Main {
                 angularBootstrap: "../../Vendor/angular-bootstrap/ui-bootstrap-tpls.min",
                 ocLazyLoad: "../../Vendor/ocLazyLoad/dist/ocLazyLoad.require.min",
                 momentjs: "../../Vendor/moment/min/moment.min",
-                rangeSlider: "../../Vendor/ionrangeslider/js/ion.rangeSlider.min",
                 'bootstrap-select': "../../Vendor/bootstrap-select/dist/js/bootstrap-select.min",
                 'nya-bs-select': "../../Vendor/nya-bootstrap-select/dist/js/nya-bs-select.min",
-                "underscore": "../../Vendor/underscore/underscore-min",
-                "perfect-scrollbar": "../../Vendor/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min",
                 toastr: "../../Vendor/toastr/toastr.min",
-                'slimscroll': "../../Vendor/slimScroll/jquery.slimscroll.min",
-                'ui.slimscroll': "../../Vendor/angular-slimscroll/angular-slimscroll",
                 modules: "modules"
             },
             shim: {
@@ -54,7 +49,7 @@ module Main {
 
                 var app = new Startup(module.config().name);
                 angular.element(document).ready(() => {
-                    angular.bootstrap(document, [app.getModuleName(), "RocketUncleApp"]);
+                    angular.bootstrap(document, [app.getModuleName(), "HMSApp"]);
                 });
             });
         });

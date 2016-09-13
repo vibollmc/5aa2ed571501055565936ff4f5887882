@@ -1,0 +1,47 @@
+{
+  "name": "HMS",
+  "homepage": "",
+  "authors": [
+    "Cuong Bui <cuongvnm.dh@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "keywords": [
+    ""
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.8",
+    "jquery": "3.1.0",
+    "angular-cookies": "1.4.7",
+    "angular-ui-router": "0.2.15",
+    "angular-bootstrap": "0.14.3",
+    "oclazyload": "1.0.6",
+    "moment": "2.10.6",
+    "bootstrap-select": "1.7.5",
+    "nya-bootstrap-select": "2.1.2",
+    "toastr": "2.1.2",
+    "angular-animate": "1.4.x",
+    "modernizr": "3.1.0",
+    "jquery-validation": "jquery-validate#1.14.0",
+    "jquery-validation-unobtrusive": "3.2.4",
+    "bootstrap-multiselect": "0.9.13",
+    "bootstrap-daterangepicker": "2.1.13",
+    "angular-ui-sortable": "0.13.4",
+    "angular-clipboard": "1.1.1",
+    "angular-xeditable": "0.1.9",
+    "js-md5": "md5#0.3.0",
+    "requirejs": "2.1.20",
+    "requirejs-text": "~2.0.10"
+  },
+  "resolutions": {
+    "angular": ">=1.2.0"
+  }
+}

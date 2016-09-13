@@ -25,3 +25,5 @@
 /Hotel.Web/Scripts/app/modules/wizard/payment.postpaid/*.js
 /Hotel.Web/Scripts/app/modules/wizard/shared/directives/*.js
 /Hotel.Web/Scripts/app/modules/wizard/shipping/*.js
+/Vendor
+/Hotel.Web/Vendor

@@ -6,16 +6,15 @@
     <meta name="description" content="Hotel Management System">
     <meta name="author" content="Hotel Management System">
     <meta name="keyword" content="Hotel Management System">
-    <link rel="shortcut icon" href="img/favicon.png">
-
+    <link rel="shortcut icon" href="img/favicon.ico">
     <title>@ViewBag.Title - Hotel Management System</title>
-
     @Styles.Render("~/Main/css")
-
+    @RenderSection("pluginStyles", false)
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
     @Scripts.Render("~/bundles/ie8")
     <![endif]-->
+    @RenderSection("customStyles", false)
 </head>
 
 <body>
@@ -377,8 +376,9 @@
                         </ol>
                     </div>
                 </div>
-                <!-- page start-->
                 @RenderBody()
+                <!-- page start-->
+                <div ui-view></div>
                 <!-- page end-->
             </section>
         </section>
@@ -388,6 +388,7 @@
     <!-- javascripts -->
     @Scripts.Render("~/Main/js")
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="@Url.Content("~/Vendor/requirejs/require.js")" data-main="@Url.Content("~/Scripts/app/main.js")"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
