@@ -22,12 +22,10 @@
                 .run(["$rootScope", "$location", "$cookieStore", "$state", "$ocLazyLoad", "$timeout", "$window",
                     ($rootScope: any, $location: any, $cookieStore: any, $state: any, $ocLazyLoad: any, $timeout: any, $window: any) => {
 
-                        var hash = $(location).attr('hash');
-
                         switch (moduleName) {
-                            case "list":
-                                $ocLazyLoad.load("/scripts/app/modules/list/list.module.js").then(() => {
-                                    $state.transitionTo("list", hash);
+                            case "hotel":
+                                $ocLazyLoad.load("/scripts/app/modules/hotel/hotel.module.js").then(() => {
+                                    $state.transitionTo("hotel");
                                 });
                                 break;
                         }
@@ -50,8 +48,7 @@
         "shared/directives/icheck.directive",
         "shared/directives/perfectscroll.directive", 
         "shared/directives/slimscroll.directive", 
-        "shared/directives/decimal.directive",
-        "shared/data/enums"
+        "shared/directives/decimal.directive"
     ], () => {
         return Startup;
     });

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -388,7 +388,10 @@
     <!-- javascripts -->
     @Scripts.Render("~/Main/js")
     @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript" src="@Url.Content("~/Vendor/requirejs/require.js")" data-main="@Url.Content("~/Scripts/app/main.js")"></script>
+    <script src="~/Vendor/angular/angular.min.js"></script>
+    <script src="~/Vendor/angular-ui-sortable/sortable.min.js"></script>
+    <script src="~/Scripts/app/hmsapp.module.js"></script>
     @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="@Url.Content("/Vendor/requirejs/require.js")" data-main="@Url.Content("/Scripts/app/main.js")"></script>
 </body>
 </html>

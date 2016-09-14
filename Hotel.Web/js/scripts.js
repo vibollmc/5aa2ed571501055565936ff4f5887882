@@ -77,13 +77,13 @@ function initializeJS() {
 
     //bar chart
     if (jQuery(".custom-custom-bar-chart")) {
-        jQuery(".bar").each(function () {
+        jQuery(".bar").each(function() {
             var i = jQuery(this).find(".value").html();
             jQuery(this).find(".value").html("");
             jQuery(this).find(".value").animate({
                 height: i
-            }, 2000)
-        })
+            }, 2000);
+        });
     }
 
 }
