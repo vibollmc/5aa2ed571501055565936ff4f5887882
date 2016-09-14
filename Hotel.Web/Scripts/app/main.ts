@@ -8,7 +8,7 @@
         requirejs.config({
             waitSeconds: 0,
             paths: {
-                jquery: "../../Vendor/jquery/dist/jquery.min",                
+                jquery: "../../js/jquery",
                 angular: "../../Vendor/angular/angular.min",
                 angularCookie: "../../Vendor/angular-cookies/angular-cookies.min",
                 angularUIRouter: "../../Vendor/angular-ui-router/release/angular-ui-router.min",

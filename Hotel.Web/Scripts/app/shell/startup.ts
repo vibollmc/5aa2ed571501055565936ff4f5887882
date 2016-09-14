@@ -25,7 +25,10 @@
                         switch (moduleName) {
                             case "hotel":
                                 $ocLazyLoad.load("/scripts/app/modules/hotel/hotel.module.js").then(() => {
-                                    $state.transitionTo("hotel");
+                                    var hash = $location.hash();
+                                    if (hash !='hotel')
+                                        $state.transitionTo("hotel", hash);
+                                    else $state.transitionTo("hotel");
                                 });
                                 break;
                         }

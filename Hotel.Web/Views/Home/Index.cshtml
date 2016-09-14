@@ -1,36 +1,9 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    Layout = null;
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hotel Management System">
-    <meta name="author" content="Hotel Management System">
-    <meta name="keyword" content="Hotel Management System">
-    <link rel="shortcut icon" href="img/favicon.ico">
-    <title>@ViewBag.Title - Hotel Management System</title>
-    @Styles.Render("~/Main/css")
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-    <!--[if lt IE 9]>
-    @Scripts.Render("~/bundles/ie8")
-    <![endif]-->
-</head>
-
-<body>
-    <!-- container section start -->
-    <section ui-view id="container">
-    </section>
-    <!-- container section end -->
-    <!-- javascripts -->
-    @Scripts.Render("~/Main/js")
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Vendor/angular/angular.min.js"></script>
-    <script src="~/Vendor/angular-ui-sortable/sortable.min.js"></script>
-    <script src="~/Scripts/app/hmsapp.module.js"></script>
+@section scripts
+{
     <script>
         var require = {
             config: {
@@ -40,6 +13,4 @@
             }
         }
     </script>
-    <script type="text/javascript" src="@Url.Content("/Vendor/requirejs/require.js")" data-main="@Url.Content("/Scripts/app/main.js")"></script>
-</body>
-</html>
+}
