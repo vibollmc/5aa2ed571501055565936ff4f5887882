@@ -1,0 +1,217 @@
+﻿<div class="row white-bg border-bottom page-headings">
+    <div class="page-heading heading-main">
+        <div class="col-md-12">
+            <div class="breadcrumb-wrapper">
+                <i class="fa fa-group"></i>
+                <ol class="breadcrumb m-l-sm">
+                    <li><a ui-sref="networkCustomer">Customers</a></li>
+                    <li class="active">{{ customerDetailsCtrl.customerInfo.FirstName }} {{ customerDetailsCtrl.customerInfo.LastName }}</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fh-breadcrumb">
+    <div class="full-height">
+        <div class="full-height-scroll" slimscroll='{"height": "100%"}'>
+            <div class="element-detail-box">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div id="profile">
+                            <span class="thumbnail thumbnail-profile">
+                                <img ng-src="{{customerDetailsCtrl.customerInfo.ImageUrl == '' && '/Content/images/generic/icon_male.png' || customerDetailsCtrl.customerInfo.ImageUrl }}">
+                            </span>
+                            <div id="profile-info">
+                                <h1 class="text-success">{{ customerDetailsCtrl.customerInfo.FirstName }} {{ customerDetailsCtrl.customerInfo.LastName }}</h1>
+                                <a href="mailto:{{ customerDetailsCtrl.customerInfo.Email }}">{{ customerDetailsCtrl.customerInfo.Email }}</a>
+                                <div>{{ customerDetailsCtrl.customerInfo.Mobile }}</div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="ibox" id="ibox-customer-payment-methods">
+                            <div class="ibox-title">
+                                <h3>Payment Methods</h3>
+                                <a class="btn btn-white btn-sm btn-tool" href="/Network/Transaction#/?userid={{ customerDetailsCtrl.customerInfo.Id }}&username={{ customerDetailsCtrl.customerInfo.FirstName }} {{ customerDetailsCtrl.customerInfo.LastName }}">
+                                    <i class="fa fa-eye"></i>
+                                    <span>View All Transactions</span>
+                                </a>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table class="table table-ru">
+                                        <thead>
+                                            <tr>
+                                                <th><span class="text-muted">Name</span></th>
+                                                <th><span class="text-muted">Type</span></th>
+                                                <th><span class="text-muted">Transactions</span></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="method in customerDetailsCtrl.customerDetailsModel.paymentMethods">
+                                                <td>
+                                                    {{method.Name}}<span ng-if="method.IsDeleted"><i>(Deleted)</i></span>
+                                                </td>
+                                                <td><img ng-src="{{method.ImageUrl}}" width="30" /> {{method.TypeName.replace('Credit ', '')}}</td>
+                                                <td>
+                                                    <a class="btn btn-xs btn-primary" href="/Network/Transaction#/?userid={{ customerDetailsCtrl.customerInfo.Id }}&username={{ customerDetailsCtrl.customerInfo.FirstName }} {{ customerDetailsCtrl.customerInfo.LastName }}&methodid={{ method.Id }}&methodname={{ method.Name }}">View All</a>
+                                                    <a class="btn btn-xs btn-white" href="/Network/Transaction#/?status=pending&userid={{ customerDetailsCtrl.customerInfo.Id }}&username={{ customerDetailsCtrl.customerInfo.FirstName }} {{ customerDetailsCtrl.customerInfo.LastName }}&methodid={{ method.Id }}&methodname={{ method.Name }}">View Pending</a>
+                                                </td>
+                                                <td class="td-action">
+                                                    <a class="fa fa-cog fa-icon-link" ng-click="customerDetailsCtrl.openPaymentMethod(method)" data-toggle="modal" data-target="{{ method.IsDeleted ? '':'#modal-payment-method-settings' }}"></a>
+                                                </td>
+                                            </tr>
+                                            <tr ng-if="customerDetailsCtrl.customerDetailsModel.paymentMethods.length <= 0">
+                                                <td colspan="4">No payment methods</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal fade modal-ru modal-ru-form" id="modal-payment-method-settings" tabindex="-1">
+    <form name="modalForm" novalidate>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ customerDetailsCtrl.openPayment.Name }} {{customerDetailsCtrl.openPayment.TypeName}}</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-no-border form-group">
+                        <!--Direct settings-->
+                        <tbody ng-show="!customerDetailsCtrl.isPostPaidMethod && !customerDetailsCtrl.isLoadingData">
+                        <tr>
+                            <td><label class="control-label">Use Network Default Settings</label></td>
+                            <td>
+                                <div class="onoffswitch switch-checker-style">
+                                    <input type="checkbox" checked="" class="onoffswitch-checkbox" ng-click="customerDetailsCtrl.toggleDirectSetting()"
+                                           id="network-default-settings-direct" ng-model="customerDetailsCtrl.directPaymentMethod.IsUseDefaultSettings"/> <!--ng-model="customerDetailsCtrl.toggleDefaultSetting"-->
+                                    <label class="onoffswitch-label" for="network-default-settings-direct">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">Spend Limit:</label></td>
+                            <td>
+                                <div class="input-group">
+                                    <input ng-model="customerDetailsCtrl.directPaymentMethod.SpendLimit.Value" ng-class="{'error':modalForm.creditLimit.$invalid }" 
+                                           ng-disabled="customerDetailsCtrl.directPaymentMethod.IsUseDefaultSettings"
+                                           class="form-control" required name="spendLimit" type="text" decimal min="0" precision="2"/>
+                                    <div class="input-group-addon">{{ customerDetailsCtrl.directPaymentMethod.SpendLimit.Symbol }}</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label" for="inputCreditLimit">Batch Amount Threshold:</label></td>
+                            <td>
+                                <input ng-model="customerDetailsCtrl.directPaymentMethod.BufferThreshold.Value" ng-class="{'error':modalForm.creditLimit.$invalid }" 
+                                       ng-disabled="customerDetailsCtrl.directPaymentMethod.IsUseDefaultSettings"
+                                       class="form-control" required name="bufferThreshold" type="text" decimal min="0" precision="2"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <input type="checkbox" ng-model="customerDetailsCtrl.directPaymentMethod.IsMaxAgeUsed" ng-show="false"
+                                           ng-disabled="customerDetailsCtrl.directPaymentMethod.IsUseDefaultSettings" />
+                                    <span>Batch Age Threshold:</span>
+                                        
+                                </div>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <input ng-model="customerDetailsCtrl.directPaymentMethod.MaxDays"
+                                           ng-class="{'error':modalForm.creditLimit.$invalid }"
+                                           ng-disabled="customerDetailsCtrl.directPaymentMethod.IsUseDefaultSettings"
+                                           class="form-control" required name="maxUnsetPaymentDays" type="text" min="0" decimal precision="0"/>
+                                    <!--ng-disabled="!customerDetailsCtrl.directPaymentMethod.IsMaxAgeUsed"-->
+                                    <div class="input-group-addon">days</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="customerDetailsCtrl.directPaymentMethod.IsFirstTimeCharged" 
+                                               ng-disabled="customerDetailsCtrl.directPaymentMethod.IsUseDefaultSettings"/>
+                                        <span>Do not process a payment method's first payment in a batch</span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <!--Postpaid Settings-->
+                        <tbody ng-show="customerDetailsCtrl.isPostPaidMethod && !customerDetailsCtrl.isLoadingData">
+                        <tr>
+                            <td><label class="control-label" for="inputCreditLimit">Use Network Default Settings</label></td>
+                            <td>
+                                <div class="onoffswitch switch-checker-style">
+                                    <input type="checkbox" checked="" class="onoffswitch-checkbox" ng-click="customerDetailsCtrl.togglePostpaidSetting()"
+                                           id="network-default-settings-postpaid" ng-model="customerDetailsCtrl.postpaidPayment.IsUseDefaultSettings"/> <!--ng-model="customerDetailsCtrl.toggleDefaultSetting"-->
+                                    <label class="onoffswitch-label" for="network-default-settings-postpaid">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label" for="inputCreditLimit">Credit Limit</label></td>
+                            <td>
+                                <div class="input-group">
+                                    <input id="inputCreditLimit" name="creditLimit"
+                                           ng-model="customerDetailsCtrl.postpaidPayment.CreditLimit.Value"
+                                           ng-disabled="customerDetailsCtrl.postpaidPayment.IsUseDefaultSettings"
+                                           class="form-control" required ng-class="{'error':modalForm.creditLimit.$invalid }"
+                                           type="text" min="0" decimal precision="2"/>
+                                    <div class="input-group-addon">{{ customerDetailsCtrl.postpaidPayment.CreditLimit.Symbol }}</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label" for="inputPaymentDay">Billing Date</label>
+                                <div class="text-muted small">Day of month</div>
+                            </td>
+                            <td>
+                                <!--<input id="inputPaymentDay" name="settlementDay" class="form-control input-group" type="number" step="1"
+                                           ng-model="customerDetailsCtrl.postpaidPayment.SettlementDay"
+                                           pattern="\d+" min="1" max="31" required ng-init="0"
+                                           ng-class="{'error':modalForm.settlementDay.$invalid && modalForm.settlementDay.$dirty}"/>-->
+                                <input id="inputPaymentDay" name="settlementDay" class="form-control input-group"
+                                       ng-class="{'error':modalForm.settlementDay.$invalid && modalForm.settlementDay.$dirty}"
+                                       required ng-init="0" ng-model="customerDetailsCtrl.postpaidPayment.SettlementDay"
+                                       ng-disabled="customerDetailsCtrl.postpaidPayment.IsUseDefaultSettings"
+                                       min="1" max="31" type="text" decimal precision="0"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <button class="btn btn-success" ng-click="customerDetailsCtrl.savePaymentMethod(modalForm.$valid)">Save</button>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-white" data-dismiss="modal" id="btn-close-modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

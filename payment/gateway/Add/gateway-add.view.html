@@ -1,0 +1,127 @@
+﻿<div class="row white-bg border-bottom page-headings">
+    <div class="page-heading heading-main">
+        <div class="col-md-12">
+            <div class="breadcrumb-wrapper">
+                <i class="fa fa-cog"></i>
+                <ol class="breadcrumb m-l-sm">
+                    <li><a ui-sref="gateway">Network Settings: Payment Gateways</a></li>
+                    <li class="active">Add Payment Gateway</li>
+                </ol>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="fh-breadcrumb">
+    <div class="full-height">
+        <div class="full-height-scroll" slimscroll='{"height": "100%"}'>
+            <div class="element-detail-box">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="ibox" id="ibox-add-payment-gateway">
+                            <div class="ibox-title">
+                                <h3>Add Payment Gateway</h3>
+                            </div>
+                            <div class="ibox-content">
+                                <form name="add" novalidate class="ng-pristine ng-valid">
+                                    <div class="form-group">
+                                        <label class="control-label" for="Name">Name<span class="required" aria-required="true">*</span> </label>
+                                        <input class="form-control" data-val="true" data-val-required="The Name field is required." id="Name" name="Name" type="text"
+                                               ng-model="addCtrl.vm.addGateway.Name" required ng-class="{'error':add.Name.$invalid && add.Name.$dirty}" />
+                                        <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="PublicKey">
+                                            Public Key<span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <input class="form-control" data-val="true" data-val-required="The PublicKey field is required." id="PublicKey" name="PublicKey" type="text" value=""
+                                               ng-model="addCtrl.vm.addGateway.PublicKey" required ng-class="{'error':add.PublicKey.$invalid && add.PublicKey.$dirty}" />
+                                        <span class="field-validation-valid" data-valmsg-for="PublicKey" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="PrivateKey">Private Key<span class="required" aria-required="true">*</span> </label>
+                                        <input class="form-control" data-val="true" data-val-required="The PrivateKey field is required." id="PrivateKey" name="PrivateKey" type="text" value=""
+                                               ng-model="addCtrl.vm.addGateway.PrivateKey" required ng-class="{'error':add.PrivateKey.$invalid && add.PrivateKey.$dirty}" />
+                                        <span class="field-validation-valid" data-valmsg-for="PrivateKey" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="Environment">Environment<span class="required" aria-required="true">*</span> </label>
+                                        <select class="form-control" data-val-required="The Environment field is required."
+                                                id="Environment" name="Environment" data-val="true"
+                                                ng-model="addCtrl.vm.addGateway.Environment">
+                                            <option selected="selected" value="DEVELOPMENT">DEVELOPMENT</option>
+                                            <option value="PRODUCTION">PRODUCTION</option>
+                                            <option value="QA">QA</option>
+                                            <option value="SANDBOX">SANDBOX</option>
+                                        </select>
+                                        <span class="field-validation-valid" data-valmsg-for="Environment" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="MerchantId">Merchant Id<span class="required" aria-required="true">*</span> </label>
+                                        <input class="form-control" data-val="true" data-val-required="The MerchantId field is required."
+                                               id="MerchantId" name="MerchantId" type="text"
+                                               ng-model="addCtrl.vm.addGateway.MerchantId" required ng-class="{'error':add.MerchantId.$invalid && add.MerchantId.$dirty}" />
+                                        <span class="field-validation-valid" data-valmsg-for="MerchantId" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <button type="submit" class="btn btn-success" ng-click="addCtrl.addPaymentGateway()">Save</button>
+                                    <a ui-sref="gateway" class="btn btn-default">Cancel</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="ibox" id="ibox-details">
+    <div class="ibox-title">
+        <h3>Add Payment Gateway</h3>
+    </div>
+    <div class="ibox-content">
+        <form class="form-horizontal" novalidate="novalidate" name="add">
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label">Name<span class="required">*</span></label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="name" name="name" ng-model="addCtrl.vm.addGateway.Name" required ng-class="{'error':add.name.$invalid && add.name.$dirty}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="publickey" class="col-md-2 control-label">Public Key<span class="required">*</span></label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="publickey" name="publickey" ng-model="addCtrl.vm.addGateway.PublicKey" required ng-class="{'error':add.publickey.$invalid && add.publickey.$dirty}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="privatekey" class="col-md-2 control-label">Private Key<span class="required">*</span></label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="privatekey" name="privatekey" ng-model="addCtrl.vm.addGateway.PrivateKey" required ng-class="{'error':add.privatekey.$invalid && add.privatekey.$dirty}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="environment" class="col-md-2 control-label">Environment<span class="required">*</span></label>
+                <div class="col-md-10">
+                    <select ng-model="addCtrl.vm.addGateway.Environment">
+                        <option value="DEVELOPMENT" selected>DEVELOPMENT</option>
+                        <option value="PRODUCTION">PRODUCTION</option>
+                        <option value="QA">QA</option>
+                        <option value="SANDBOX">SANDBOX</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="merchantid" class="col-md-2 control-label">Merchant ID<span class="required">*</span></label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="merchantid" name="merchantid" ng-model="addCtrl.vm.addGateway.MerchantId" required ng-class="{'error':add.merchantid.$invalid && add.merchantid.$dirty}"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="col-md-12" style="text-align: right">
+    <input type="button" class="btn btn-default" value="Cancel" ng-click="addCtrl.backToList()"/>
+    <input type="button" class="btn btn-success" value="Next" ng-click="addCtrl.addPaymentGateway()"/>
+</div>-->

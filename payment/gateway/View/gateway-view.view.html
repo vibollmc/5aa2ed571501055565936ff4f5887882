@@ -1,0 +1,141 @@
+﻿<div class="row white-bg border-bottom page-headings">
+    <div class="page-heading heading-main">
+        <div class="col-md-12">
+            <div class="breadcrumb-wrapper">
+                <i class="fa fa-cog"></i>
+                <ol class="breadcrumb m-l-sm">
+                    <li><a ui-sref="gateway">Network Settings: Payment Gateways</a></li>
+                    <li class="active">{{viewCtrl.vm.selectedGateway.Name}}</li>
+                </ol>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="fh-breadcrumb">
+    <div class="full-height">
+        <div class="full-height-scroll" slimscroll='{"height": "100%"}'>
+            <div class="element-detail-box">
+                <div class="ibox" id="ibox-details">
+                    <div class="ibox-title">
+                        <h3>Payment Gateway Details</h3>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal ng-pristine ng-valid" novalidate>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Gateway_Name">Name</label>
+                                <div class="col-md-10">
+                                    <input class="form-control valid" id="Gateway_Name" name="Gateway.Name"
+                                           readonly="readonly" type="text" aria-invalid="false"
+                                           ng-model="viewCtrl.vm.selectedGateway.Name" />
+                                    <span class="field-validation-valid" data-valmsg-for="Gateway.Name" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Gateway_GatewayType">Type</label>
+                                <div class="col-md-10">
+                                    <input class="form-control valid" data-val="true" data-val-required="The Type field is required."
+                                           id="Gateway_GatewayType" name="Gateway.GatewayType" readonly="readonly" type="text"
+                                           aria-required="true" aria-invalid="false" aria-describedby="Gateway_GatewayType-error"
+                                           ng-model="viewCtrl.vm.selectedGateway.TypeString" />
+                                    <span class="field-validation-valid" data-valmsg-for="Gateway.GatewayType" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Gateway_PublicKey">Public Key</label>
+                                <div class="col-md-10">
+                                    <input class="form-control valid" id="Gateway_PublicKey" name="Gateway.PublicKey" readonly="readonly"
+                                           type="text" aria-invalid="false" ng-model="viewCtrl.vm.selectedGateway.PublicKey" />
+                                    <span class="field-validation-valid" data-valmsg-for="Gateway.PublicKey" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Gateway_PrivateKey">Private Key</label>
+                                <div class="col-md-10">
+                                    <input class="form-control valid" id="Gateway_PrivateKey" name="Gateway.PrivateKey" readonly="readonly" type="text"
+                                           aria-invalid="false" ng-model="viewCtrl.vm.selectedGateway.PrivateKey" />
+                                    <span class="field-validation-valid" data-valmsg-for="Gateway.PrivateKey" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Gateway_Environment">Environment</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" data-val="true" data-val-required="The Environment field is required." id="Gateway_Environment"
+                                           name="Gateway.Environment" readonly="readonly" type="text" ng-model="viewCtrl.vm.selectedGateway.EnvironmentString" />
+                                    <span class="field-validation-valid" data-valmsg-for="Gateway.Environment" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="Gateway_MerchantId">Merchant ID</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" id="Gateway_MerchantId" name="Gateway.MerchantId"
+                                           readonly="readonly" type="text" ng-model="viewCtrl.vm.selectedGateway.MerchantId" />
+                                    <span class="field-validation-valid" data-valmsg-for="Gateway.MerchantId" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="ibox" id="ibox-network-refs">
+                    <div class="ibox-title">
+                        <h3>Merchant Account</h3>
+                        <a class="btn btn-white btn-sm btn-tool" data-toggle="modal" data-target="#add-merchant-account">
+                            <i class="fa fa-plus"></i>
+                            <span>Add Merchant Account</span>
+                        </a>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Network Name</td>
+                                        <td>Network Key</td>
+                                        <td>Network Currency</td>
+                                        <td>Reference Type</td>
+                                        <td>Merchant Account ID</td>
+                                        <td>Actions</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-if="!viewCtrl.vm.selectedGateway.NetworkRefs">
+                                        <td colspan="6" class="text-center" style="padding: 30px;">
+                                            You need to add a merchant account before you can use this payment gateway
+                                        </td>
+                                    </tr>
+
+                                    <tr style="width: 100%;" ng-if="viewCtrl.vm.selectedGateway.NetworkRefs" ng-repeat="networkRef in viewCtrl.vm.selectedGateway.NetworkRefs">
+                                        <td>
+                                            {{networkRef.NetworkName}}
+                                        </td>
+                                        <td>
+                                            {{networkRef.NetworkPrivateKey}}
+                                        </td>
+                                        <td>
+                                            {{networkRef.Currency}}
+                                        </td>
+                                        <td>
+                                            {{networkRef.ReferenceTypeString}}
+                                        </td>
+                                        <td>
+                                            {{networkRef.MerchantAccountId}}
+                                        </td>
+                                        <td>
+                                            <input type="button" class="btn btn-primary btn-xs" value="Validate" data-toggle="modal" ng-click="viewCtrl.validateNetwork(networkRef.MerchantAccountId)"/>
+                                            <input type="button" class="btn btn-danger btn-xs" value="Remove" ng-click="viewCtrl.removeMerchantAccount(networkRef.NetworkPrivateKey)" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-include src="'/scripts/app/modules/payment/gateway/view/add-merchant-account.view.html'"></ng-include>
