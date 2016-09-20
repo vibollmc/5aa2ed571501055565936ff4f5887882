@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS.Web.Main", "Hotel.Web\HMS.Web.Main.csproj", "{13CBF644-8112-433B-BE58-CABA21E5A8AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS.Web.Main", "HMS.Web.Main\HMS.Web.Main.csproj", "{13CBF644-8112-433B-BE58-CABA21E5A8AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel.Domain", "Hotel.Domain\Hotel.Domain.csproj", "{DE13C8EF-DC0E-474B-B1FD-9D4CA45E5751}"
 EndProject
