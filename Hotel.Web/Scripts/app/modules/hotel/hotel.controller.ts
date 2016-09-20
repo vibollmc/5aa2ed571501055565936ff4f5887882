@@ -1,4 +1,5 @@
 ﻿module Hotel {
+    declare var jQuery;
     export class HotelController {
         $scope: any;
         $state: any;
@@ -10,9 +11,18 @@
             this.$state = $state;
             this.$rootScope = $rootScope;
             this.$log = $log;
+
+            jQuery('#side-menu').metisMenu();
+
+            this.$rootScope.Title = "Dashboard";
         }
         public goRoomType() {
-            this.$state.transitionTo("roomtype");
+            this.$rootScope.Title = "Danh mục loại phòng";
+            this.$state.go("roomtype");
+        }
+        public goDashboard() {
+            this.$rootScope.Title = "Dashboard";
+            this.$state.go("hotel");
         }
     }
 }

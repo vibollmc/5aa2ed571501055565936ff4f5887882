@@ -1,4 +1,5 @@
 ﻿module Hotel {
+    "use strict";
 
     declare var toastr;
 
@@ -20,7 +21,8 @@
             this.$rootScope = $rootScope;
             this.$log = $log;
 
-            this.vm.loadRoomType();
+            this.$rootScope.Title = "Danh mục loại phòng";
+            //this.vm.loadRoomType();
 
             this.vm.roomType = new RoomType();
         }

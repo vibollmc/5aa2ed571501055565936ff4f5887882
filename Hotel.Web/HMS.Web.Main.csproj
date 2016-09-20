@@ -247,6 +247,7 @@
     <Content Include="css\jquery-ui-1.10.4.min.css" />
     <Content Include="css\line-icons.css" />
     <Content Include="css\owl.carousel.css" />
+    <Content Include="css\sb-admin-2.css" />
     <Content Include="css\style-responsive.css" />
     <Content Include="css\style.css" />
     <Content Include="css\widgets.css" />
@@ -349,6 +350,7 @@
     <Content Include="js\sparkline-chart.js" />
     <Content Include="js\sparklines.js" />
     <Content Include="js\xcharts.min.js" />
+    <Content Include="js\sb-admin-2.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\angular-ui-router.min.js" />
@@ -426,6 +428,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

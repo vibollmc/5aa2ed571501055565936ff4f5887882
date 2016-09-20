@@ -22,12 +22,30 @@
                 .run(["$rootScope", "$location", "$cookieStore", "$state", "$ocLazyLoad", "$timeout", "$window",
                     ($rootScope: any, $location: any, $cookieStore: any, $state: any, $ocLazyLoad: any, $timeout: any, $window: any) => {
 
+                        $rootScope.$on("$locationChangeSuccess", () => {
+                            $rootScope.actualLocation = $location.path();
+                        });
+
+                        $rootScope.$watch(() => $location.path(), (newLocation, oldLocation) => {
+                            if ($rootScope.actualLocation === newLocation) {
+
+                                var url = newLocation.toLowerCase();
+                                while (url.indexOf("/") > -1) {
+                                    url = url.substr(url.indexOf("/") + 1);
+                                }
+                                if (url !== "") $state.go(url);
+                                else $state.go("hotel");
+                            }
+                        });
+
                         switch (moduleName) {
                             case "hotel":
                                 $ocLazyLoad.load("/scripts/app/modules/hotel/hotel.module.js").then(() => {
-                                    var hash = $location.hash();
-                                    if (hash !='hotel')
-                                        $state.transitionTo("hotel", hash);
+                                    var url = $location.url().toLowerCase();
+                                    while (url.indexOf("/") > -1) {
+                                        url = url.substr(url.indexOf("/") + 1);
+                                    }
+                                    if (url !== "") $state.transitionTo(url);
                                     else $state.transitionTo("hotel");
                                 });
                                 break;
@@ -46,6 +64,7 @@
         "angularUIRouter",
         "angularBootstrap",
         "ocLazyLoad",
+        "metisMenu",
         "shared/services/api.service",
         "shared/directives/loading-icon",
         "shared/directives/icheck.directive",

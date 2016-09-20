@@ -17,4 +17,3 @@ var Main;
     }
     Main.DirectiveIcheck = DirectiveIcheck;
 })(Main || (Main = {}));
-//# sourceMappingURL=icheck.directive.js.map

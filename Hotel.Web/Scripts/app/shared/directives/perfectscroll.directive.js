@@ -12,4 +12,3 @@ var Main;
     }
     Main.DirectivePerfectscroll = DirectivePerfectscroll;
 })(Main || (Main = {}));
-//# sourceMappingURL=perfectscroll.directive.js.map

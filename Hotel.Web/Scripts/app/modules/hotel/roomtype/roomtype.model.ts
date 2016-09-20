@@ -1,15 +1,19 @@
 ﻿module Hotel {
-    
+    "use strict";
 
     export class RoomTypeModel {
+        $q: any;
         idRoomType: string;
         roomType: RoomType;
         listRoomType: RoomType[];
         roomtypeService: IRoomTypeService;
-        static $inject = ["RoomTypeService"];
-        constructor(roomtypeService: IRoomTypeService) {
+        static $inject = ["$q", "RoomTypeService"];
+        constructor($q: any, roomtypeService: IRoomTypeService) {
             this.roomtypeService = roomtypeService;
             this.listRoomType = new Array<RoomType>();
+            this.roomType = new RoomType();
+            this.idRoomType = null;
+            this.$q = $q;
         }
 
         public loadRoomType(): void {

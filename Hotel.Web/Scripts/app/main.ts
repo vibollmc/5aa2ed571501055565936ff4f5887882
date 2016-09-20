@@ -8,7 +8,7 @@
         requirejs.config({
             waitSeconds: 0,
             paths: {
-                jquery: "../../js/jquery",
+                jquery: "../../Vendor/jquery/dist/jquery.min",
                 angular: "../../Vendor/angular/angular.min",
                 angularCookie: "../../Vendor/angular-cookies/angular-cookies.min",
                 angularUIRouter: "../../Vendor/angular-ui-router/release/angular-ui-router.min",
@@ -18,6 +18,7 @@
                 'bootstrap-select': "../../Vendor/bootstrap-select/dist/js/bootstrap-select.min",
                 'nya-bs-select': "../../Vendor/nya-bootstrap-select/dist/js/nya-bs-select.min",
                 toastr: "../../Vendor/toastr/toastr.min",
+                metisMenu: "../../Vendor/metisMenu/dist/metisMenu",
                 modules: "modules"
             },
             shim: {
@@ -37,6 +38,9 @@
                     deps: ["jquery"]
                 },
                 toastr: {
+                    deps: ["jquery"]
+                },
+                metisMenu: {
                     deps: ["jquery"]
                 }
             }

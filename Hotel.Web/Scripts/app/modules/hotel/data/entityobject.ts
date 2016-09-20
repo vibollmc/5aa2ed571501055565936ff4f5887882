@@ -1,5 +1,13 @@
 ﻿module Hotel {
     export class RoomType {
+        constructor() {
+            this.Id = null;
+            this.Name = null;
+            this.FormulaByDay = null;
+            this.FormulaByHalfDay = null;
+            this.FormulaByHour = null;
+            this.Status = Status.Active;
+        }
         Id: string;
         Name: string;
         FormulaByDay: string;

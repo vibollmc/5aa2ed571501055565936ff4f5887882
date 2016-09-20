@@ -1,6 +1,5 @@
 ﻿module Hotel {
     "use strict";
-    declare var angular: any;
 
     export interface IRoomTypeService {
         loadRoomType(): RoomType[];
@@ -9,16 +8,15 @@
     }
 
     export class RoomTypeService implements IRoomTypeService {
-        $timeout: any;
+        $q: any;
         $http: any;
-        $log: any;
         apiAddresses: any;
 
-        static $inject = ["$http", "$log", "$timeout", "ApiAddresses"];
+        static $inject = ["$http", "$q", "ApiAddresses"];
 
-        constructor($http: any, $log: any, $timeout: any, apiAddresses: any) {
+        constructor($http: any, $q: any, apiAddresses: any) {
             this.$http = $http;
-            this.$log = $log;
+            this.$q = $q;
             this.apiAddresses = apiAddresses;
         }
 
@@ -27,7 +25,7 @@
                     return response;
                 })
                 .error((data, status) => {
-                    this.logError(data, status);
+                    
                     return null;
                 });
         }
@@ -37,7 +35,6 @@
                     return true;
                 })
                 .error((data, status) => {
-                    this.logError(data, status);
                     return false;
                 });
         }
@@ -47,13 +44,9 @@
                     return true;
                 })
                 .error((data, status) => {
-                    this.logError(data, status);
+                    
                     return false;
                 });
-        }
-
-        private logError(data: any, status: any): void {
-            this.$log.error(data);
         }
     }
 }

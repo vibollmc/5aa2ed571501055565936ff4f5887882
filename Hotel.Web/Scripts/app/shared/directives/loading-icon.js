@@ -10,4 +10,3 @@ var Main;
     }
     Main.remove_loading_icon = remove_loading_icon;
 })(Main || (Main = {}));
-//# sourceMappingURL=loading-icon.js.map
