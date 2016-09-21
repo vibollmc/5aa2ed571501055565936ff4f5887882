@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hotel", "Hotel\Hotel.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hotel-Context", "Hotel-Context", "{6DE70CEE-5C04-4C5E-A5C5-E41F111A81CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS.Core.DataAccess", "HMS.Core.DataAccess\HMS.Core.DataAccess.csproj", "{DB5C5B72-5061-4460-8B4E-75238255AD48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{8FAB9748-81A3-47B5-9762-FF8A056C6350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FAB9748-81A3-47B5-9762-FF8A056C6350}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FAB9748-81A3-47B5-9762-FF8A056C6350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB5C5B72-5061-4460-8B4E-75238255AD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB5C5B72-5061-4460-8B4E-75238255AD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB5C5B72-5061-4460-8B4E-75238255AD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB5C5B72-5061-4460-8B4E-75238255AD48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,5 +18,10 @@ var Hotel;
         return User;
     }());
     Hotel.User = User;
+    var Results = (function () {
+        function Results() {
+        }
+        return Results;
+    }());
+    Hotel.Results = Results;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=entityobject.js.map

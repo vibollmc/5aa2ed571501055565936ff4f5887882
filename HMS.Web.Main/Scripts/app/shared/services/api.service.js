@@ -12,4 +12,3 @@ var Main;
     }());
     Main.ApiService = ApiService;
 })(Main || (Main = {}));
-//# sourceMappingURL=api.service.js.map

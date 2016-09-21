@@ -13,4 +13,3 @@ var Main;
     }());
     Main.jsonDate = jsonDate;
 })(Main || (Main = {}));
-//# sourceMappingURL=jsonDate.filter.js.map

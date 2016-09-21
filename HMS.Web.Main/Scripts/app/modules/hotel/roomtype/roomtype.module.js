@@ -39,4 +39,3 @@ var Hotel;
         new RoomTypeModule();
     });
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=roomtype.module.js.map

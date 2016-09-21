@@ -1,11 +1,10 @@
 ﻿using Hotel.Domain.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HMS.Core.DataAccess.Interface;
 using Hotel.Domain.Data;
 using Hotel.Domain.Data.Enum;
 using MongoDB.Driver;
-using Hotel.Persistence.DbAccess.Interface;
 
 namespace Hotel.Persistence
 {

@@ -40,4 +40,3 @@ var ModalDirective;
     }
     ModalDirective.ModalPopup = ModalPopup;
 })(ModalDirective || (ModalDirective = {}));
-//# sourceMappingURL=modal.controller.js.map

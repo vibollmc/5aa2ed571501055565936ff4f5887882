@@ -54,4 +54,3 @@ var ModalDirective;
     }());
     ModalDirective.InputValidation = InputValidation;
 })(ModalDirective || (ModalDirective = {}));
-//# sourceMappingURL=modal.model.js.map

@@ -10,10 +10,11 @@
         static $inject = ["$q", "RoomTypeService"];
         constructor($q: any, roomtypeService: IRoomTypeService) {
             this.roomtypeService = roomtypeService;
-            this.listRoomType = new Array<RoomType>();
-            this.roomType = new RoomType();
             this.idRoomType = null;
             this.$q = $q;
+            this.roomType = new RoomType();
+
+            this.loadRoomType();
         }
 
         public loadRoomType(): void {

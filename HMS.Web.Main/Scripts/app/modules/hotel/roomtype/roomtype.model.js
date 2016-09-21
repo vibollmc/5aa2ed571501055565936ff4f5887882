@@ -4,10 +4,10 @@ var Hotel;
     var RoomTypeModel = (function () {
         function RoomTypeModel($q, roomtypeService) {
             this.roomtypeService = roomtypeService;
-            this.listRoomType = new Array();
-            this.roomType = new Hotel.RoomType();
             this.idRoomType = null;
             this.$q = $q;
+            this.roomType = new Hotel.RoomType();
+            this.loadRoomType();
         }
         RoomTypeModel.prototype.loadRoomType = function () {
             this.listRoomType = this.roomtypeService.loadRoomType();
@@ -23,4 +23,3 @@ var Hotel;
     }());
     Hotel.RoomTypeModel = RoomTypeModel;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=roomtype.model.js.map

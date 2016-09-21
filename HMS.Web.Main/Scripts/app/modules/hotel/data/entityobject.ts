@@ -29,4 +29,10 @@
         LastLoginDate: any;
         Status: Status;
     }
+
+    export class Results<T> {
+        Code: ResultCode;
+        Data: T;
+        Message: string;
+    }
 }

@@ -46,4 +46,3 @@ var Hotel;
         return new Module();
     });
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=hotel.module.js.map

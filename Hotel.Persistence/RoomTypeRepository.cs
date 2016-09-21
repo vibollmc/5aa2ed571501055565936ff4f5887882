@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HMS.Core.DataAccess.Interface;
 using Hotel.Domain.Data;
 using Hotel.Domain.Data.Enum;
 using Hotel.Domain.Repositories;
-using Hotel.Persistence.DbAccess.Interface;
 using MongoDB.Driver;
 namespace Hotel.Persistence
 {
@@ -23,7 +22,7 @@ namespace Hotel.Persistence
         public async Task<IEnumerable<RoomType>> GetRoomType(string filterString)
         {
             var collection = _readDataContextFactory.CreateMongoDbReadContext().GetCollection<RoomType>(MongoDbCollectionName.RoomType);
-            var filter = Builders<RoomType>.Filter.Where(x => x.Name.Contains(filterString));
+            var filter = Builders<RoomType>.Filter.Where(x => string.IsNullOrWhiteSpace(filterString) || x.Name.Contains(filterString));
 
             return await collection.Find(filter).ToListAsync();
         }

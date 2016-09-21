@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace Hotel.Persistence.DbAccess.Interface
+namespace HMS.Core.DataAccess.Interface
 {
     public interface IReadDataContextFactory
     {

@@ -9,8 +9,6 @@ var Hotel;
             this.$state = $state;
             this.$rootScope = $rootScope;
             this.$log = $log;
-            //this.vm.loadRoomType();
-            this.vm.roomType = new Hotel.RoomType();
         }
         RoomTypeController.prototype.saveRoomType = function () {
             if (this.vm.saveRoomType()) {
@@ -36,4 +34,3 @@ var Hotel;
     }());
     Hotel.RoomTypeController = RoomTypeController;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=roomtype.controller.js.map

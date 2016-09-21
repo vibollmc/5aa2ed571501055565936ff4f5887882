@@ -45,3 +45,8 @@
 /Hotel.Web/Scripts/app/modules/hotel/roomtype/*.map
 /Hotel.Web/Scripts/app/modules/hotel/data/*.map
 /payment
+/HMS.Core.DataAccess/bin
+/HMS.Core.DataAccess/obj
+/HMS.Web.Main/bin
+/HMS.Web.Main/obj
+/HMS.Web.Main/Vendor

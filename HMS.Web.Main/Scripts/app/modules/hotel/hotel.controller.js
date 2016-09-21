@@ -19,4 +19,3 @@ var Hotel;
     }());
     Hotel.HotelController = HotelController;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=hotel.controller.js.map

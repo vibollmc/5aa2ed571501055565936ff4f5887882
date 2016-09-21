@@ -36,4 +36,3 @@ var Hotel;
     }());
     Hotel.RoomTypeService = RoomTypeService;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=roomtype.service.js.map

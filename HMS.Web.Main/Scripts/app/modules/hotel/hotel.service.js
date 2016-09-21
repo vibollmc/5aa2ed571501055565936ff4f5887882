@@ -7,4 +7,3 @@ var Hotel;
     }());
     Hotel.HotelService = HotelService;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=hotel.service.js.map

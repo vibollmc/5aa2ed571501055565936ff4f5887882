@@ -19,11 +19,7 @@
             this.$scope = $scope;
             this.$state = $state;
             this.$rootScope = $rootScope;
-
             this.$log = $log;
-            //this.vm.loadRoomType();
-
-            this.vm.roomType = new RoomType();
         }
 
         public saveRoomType(): void {

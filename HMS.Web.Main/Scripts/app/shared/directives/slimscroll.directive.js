@@ -15,4 +15,3 @@ var Main;
     }
     Main.DirectiveSlimscroll = DirectiveSlimscroll;
 })(Main || (Main = {}));
-//# sourceMappingURL=slimscroll.directive.js.map

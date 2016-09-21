@@ -30,4 +30,10 @@
         Male = 1,
         Female = 2,
     }
+    export enum ResultCode {
+        Undefined = 0,
+        Error = 1,
+        Success = 2,
+        Warning = 3
+    }
 }

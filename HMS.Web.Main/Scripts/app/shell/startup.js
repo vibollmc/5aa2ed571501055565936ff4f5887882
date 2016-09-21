@@ -71,4 +71,3 @@ var Main;
         return Startup;
     });
 })(Main || (Main = {}));
-//# sourceMappingURL=startup.js.map

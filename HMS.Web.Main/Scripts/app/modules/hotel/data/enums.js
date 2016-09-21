@@ -36,5 +36,11 @@ var Hotel;
         Gender[Gender["Female"] = 2] = "Female";
     })(Hotel.Gender || (Hotel.Gender = {}));
     var Gender = Hotel.Gender;
+    (function (ResultCode) {
+        ResultCode[ResultCode["Undefined"] = 0] = "Undefined";
+        ResultCode[ResultCode["Error"] = 1] = "Error";
+        ResultCode[ResultCode["Success"] = 2] = "Success";
+        ResultCode[ResultCode["Warning"] = 3] = "Warning";
+    })(Hotel.ResultCode || (Hotel.ResultCode = {}));
+    var ResultCode = Hotel.ResultCode;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=enums.js.map

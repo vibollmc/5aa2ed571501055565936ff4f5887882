@@ -7,4 +7,3 @@ var Hotel;
     }());
     Hotel.HotelModel = HotelModel;
 })(Hotel || (Hotel = {}));
-//# sourceMappingURL=hotel.model.js.map

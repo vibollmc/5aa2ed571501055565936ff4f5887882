@@ -219,6 +219,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Results.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -444,9 +446,21 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HMS.Core.DataAccess\HMS.Core.DataAccess.csproj">
+      <Project>{DB5C5B72-5061-4460-8B4E-75238255AD48}</Project>
+      <Name>HMS.Core.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HMS.DependencyInjection\HMS.DependencyInjection.csproj">
       <Project>{d298c8e2-28ed-420e-9f11-d55e8df6a25f}</Project>
       <Name>HMS.DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotel.Api\Hotel.Api.csproj">
+      <Project>{13C3F8E5-6EF4-4DD2-9A9F-9FBF2B5A0A2D}</Project>
+      <Name>Hotel.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hotel.Domain\Hotel.Domain.csproj">
+      <Project>{DE13C8EF-DC0E-474B-B1FD-9D4CA45E5751}</Project>
+      <Name>Hotel.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hotel\Hotel.csproj">
       <Project>{8fab9748-81a3-47b5-9762-ff8a056c6350}</Project>

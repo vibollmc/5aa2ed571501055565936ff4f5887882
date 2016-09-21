@@ -14,5 +14,11 @@ namespace Hotel.Api
         Task<IEnumerable<User>> GetListUser(string searchFilter);
         Task<bool> ChangeUserStatus(string userName, Status status);
         #endregion User Management
+
+        #region Room type management
+        Task<bool> SaveRoomType(RoomType roomType);
+        Task<IEnumerable<RoomType>> GetRoomType(string filterString);
+        Task<bool> UpdateRoomTypeStatus(string id, Status status);
+        #endregion Room type management
     }
 }
